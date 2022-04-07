@@ -1,33 +1,27 @@
-package com.testinium.entity;
+package com.testinium.dto.response;
 
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.testinium.entity.EducationYear;
+
 /**
+ * 
  * @author Remzi ŞAHBAZ
  *
  */
-@Entity
-@Table(name="students")
-public class Student {
+public class AddStudentResponse {
 
-	@Id
+
 	private String identity;
 	private String fullName;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<EducationYear> educationYear;
+	
+	
 	/**
 	 * 
 	 */
-	public Student() {
+	public AddStudentResponse() {
 	}
 	/**
 	 * @return the identity
@@ -66,6 +60,11 @@ public class Student {
 		this.educationYear = educationYear;
 	}
 	@Override
+	public String toString() {
+		return "AddStudentRequest [identity=" + identity + ", fullName=" + fullName + ", educationYear=" + educationYear
+				+ "]";
+	}
+	@Override
 	public int hashCode() {
 		return Objects.hash(identity);
 	}
@@ -77,13 +76,8 @@ public class Student {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Student other = (Student) obj;
+		AddStudentResponse other = (AddStudentResponse) obj;
 		return Objects.equals(identity, other.identity);
 	}
-	@Override
-	public String toString() {
-		return "Student [identity=" + identity + ", fullName=" + fullName + ", educationYear=" + educationYear + "]";
-	}
-	
 	
 }
