@@ -2007,6 +2007,7 @@ IEclipsePreferences#org-eclipse-ui-editors {
 		'TextOccurrenceIndicationColor=27, 98, 145'
 		'asOccurencesIndicationColor=47,47,3'
 		'breakpointIndicationColor=35,83,135'
+		'currentIPColor=34,34,32'
 		'currentLineColor=20,37,25'
 		'deletionIndicationColor=255,0,0'
 		'filteredSearchResultIndicationColor=18,68,101'
@@ -2028,6 +2029,7 @@ IEclipsePreferences#org-eclipse-ui-editors {
 		'searchResultHighlighting=false'
 		'searchResultIndication=true'
 		'searchResultTextStyle=BOX'
+		'secondaryIPColor=34,34,32'
 		'spellingIndicationColor=253,170,211'
 		'writeOccurrenceIndicationColor=47,47,3'
 }
