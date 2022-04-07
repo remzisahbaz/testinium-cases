@@ -7,3 +7,4 @@
 .metadata/.plugins/org.eclipse.core.resources/.history/29/80a5dc1ea9b5001c17fa812486666a57
 *.history
 .metadata/.lock
+*.properties
