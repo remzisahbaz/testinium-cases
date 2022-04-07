@@ -1,0 +1,23 @@
+package com.demiroren.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demiroren.repository.ContactRepository;
+
+/**
+ * @author Remzi ŞAHBAZ
+ *
+ */
+@Service
+public class ContactService {
+
+	@Autowired
+	private final ContactRepository contactRepository;
+
+	public ContactService(ContactRepository contactRepository) {
+		this.contactRepository = contactRepository;
+	}
+	
+	
+}

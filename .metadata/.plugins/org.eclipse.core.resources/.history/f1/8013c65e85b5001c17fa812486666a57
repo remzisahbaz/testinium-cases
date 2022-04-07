@@ -1,0 +1,5 @@
+package com.demiroren.dto.request;
+
+public class AddContactRequest {
+
+}

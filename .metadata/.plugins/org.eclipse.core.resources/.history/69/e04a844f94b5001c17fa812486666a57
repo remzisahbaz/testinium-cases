@@ -1,0 +1,19 @@
+package com.demiroren.service;
+
+import org.springframework.stereotype.Service;
+
+import com.demiroren.dto.ContactResponse;
+import com.demiroren.dto.request.AddContactRequest;
+
+/**
+ * @author Remzi ŞAHBAZ
+ *
+ */
+@Service
+public interface ContactService {
+
+	public ContactResponse addContact(AddContactRequest request) ;
+	public ContactResponse getContact(AddContactRequest request) ;
+	
+	
+}

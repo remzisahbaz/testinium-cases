@@ -1,0 +1,5 @@
+package com.demiroren.dto;
+
+public class ContactResponse {
+
+}

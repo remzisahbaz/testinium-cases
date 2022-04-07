@@ -1,0 +1,8 @@
+package com.demiroren.service;
+
+import com.demiroren.repository.ContactRepository;
+
+public class ContactService {
+
+	private ContactRepository contactRepository;
+}

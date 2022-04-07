@@ -1,0 +1,19 @@
+package com.demiroren.config;
+
+import org.modelmapper.Converter;
+import org.springframework.context.annotation.Configuration;
+
+import com.demiroren.Entity.Contact;
+import com.demiroren.dto.request.AddContactRequest;
+
+/**
+ * @author Remzi ŞAHBAZ
+ *
+ */
+@Configuration
+public class ModelMapperConfiguration{
+
+	public static final Converter<AddContactRequest, Contact> 
+	AddContactRequest_To_Contact= (context)->{};
+	
+}

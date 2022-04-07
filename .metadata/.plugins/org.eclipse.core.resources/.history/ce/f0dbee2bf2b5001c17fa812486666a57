@@ -1,0 +1,30 @@
+package testinium;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Task {
+
+	public static void main(String[] args) {
+		
+		List<String> list= new ArrayList<String>();
+		
+		int counter=100;
+		do {
+			list.add("*");
+			counter--;
+		} while (counter>0);
+		
+		for(int i=100;i>1;i--) {
+			
+			for(int j=0;j<i;j++) {
+				int size=list.size();
+				System.out.print(list.get(j));
+				list.set(j, "");
+				list.set(size-j, "");
+				System.out.println();
+			}	
+		}
+	}
+	
+}

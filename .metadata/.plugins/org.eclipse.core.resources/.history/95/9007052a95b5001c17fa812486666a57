@@ -1,0 +1,14 @@
+package com.demiroren.service.business;
+
+import javax.websocket.server.ServerEndpoint;
+
+import org.springframework.stereotype.Service;
+
+/**
+ * @author Remzi ŞAHBAZ
+ *
+ */
+@Service
+public class StandartContactService {
+
+}

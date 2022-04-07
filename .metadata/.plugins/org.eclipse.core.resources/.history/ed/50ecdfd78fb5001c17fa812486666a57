@@ -1,0 +1,39 @@
+package com.demiroren.config;
+
+import org.modelmapper.Converter;
+import org.springframework.context.annotation.Configuration;
+
+import com.demiroren.Entity.Contact;
+import com.demiroren.Entity.Phone;
+import com.demiroren.dto.request.AddContactRequest;
+
+/**
+ * @author Remzi ŞAHBAZ
+ *
+ */
+@Configuration
+public class ModelMapperConfiguration{
+
+	public static final Converter<AddContactRequest, Contact> 
+	AddContactRequest_To_Contact= (context)->{
+		
+		var contact=context.getDestination();
+		var request=context.getSource();
+		
+		contact.setLastName(request.getLastName());
+		contact.setName(request.getName());
+		var phone= request.getPhone()
+							.stream()
+							.map(phone ->{
+								
+								var phone= new Phone();
+								
+							
+							})
+							.toList();
+							
+
+		return null;
+	};
+	
+}

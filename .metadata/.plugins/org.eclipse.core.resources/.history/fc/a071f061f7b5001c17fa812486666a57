@@ -1,0 +1,32 @@
+package testinium;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Task {
+
+	public static void reverseTree(int counter, String c) {
+		List<String> list = new ArrayList<String>();
+		var push=counter;
+		do {
+			list.add(c);
+			push--;
+		} while (push > 0);
+
+		for (int i = 0; i < counter/2+1; i++) {
+
+			for (int j = 0; j < counter; j++)
+				System.out.print(list.get(j));
+
+			list.set(i, " ");
+			list.set((list.size() - i - 1), " ");
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		reverseTree(100,"+");
+	}
+
+}

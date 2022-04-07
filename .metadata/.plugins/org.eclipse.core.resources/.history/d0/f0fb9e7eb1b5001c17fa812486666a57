@@ -1,0 +1,17 @@
+package com.demiroren.service;
+
+import com.demiroren.dto.ContactResponse;
+import com.demiroren.dto.request.AddContactRequest;
+
+/**
+ * @author Remzi ŞAHBAZ
+ *
+ */
+
+public interface ContactService {
+
+	public ContactResponse addContact(AddContactRequest request) ;
+	public ContactResponse getContact(AddContactRequest request) ;
+	
+	
+}
