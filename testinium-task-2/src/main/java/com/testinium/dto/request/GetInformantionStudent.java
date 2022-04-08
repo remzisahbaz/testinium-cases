@@ -1,90 +1,71 @@
-package com.testinium.entity;
+package com.testinium.dto.request;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import com.testinium.entity.EducationYear;
 /**
+ * 
  * @author Remzi ŞAHBAZ
  *
  */
-@Entity
-@Table(name = "students")
-public class Student implements Serializable{
+public class GetInformantionStudent {
 
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
 	private String identity;
 	private String fullName;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<EducationYear> educationYear;
-
+	
+	
 	/**
 	 * 
 	 */
-	public Student() {
+	public GetInformantionStudent() {
 	}
-
 	/**
 	 * @return the identity
 	 */
 	public String getIdentity() {
 		return identity;
 	}
-
 	/**
 	 * @param identity the identity to set
 	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
-
 	/**
 	 * @return the fullName
 	 */
 	public String getFullName() {
 		return fullName;
 	}
-
 	/**
 	 * @param fullName the fullName to set
 	 */
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
 	/**
 	 * @return the educationYear
 	 */
 	public List<EducationYear> getEducationYear() {
 		return educationYear;
 	}
-
 	/**
 	 * @param educationYear the educationYear to set
 	 */
 	public void setEducationYear(List<EducationYear> educationYear) {
 		this.educationYear = educationYear;
 	}
-
+	@Override
+	public String toString() {
+		return "AddStudentRequest [identity=" + identity + ", fullName=" + fullName + ", educationYear=" + educationYear
+				+ "]";
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(identity);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,13 +74,9 @@ public class Student implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Student other = (Student) obj;
+		GetInformantionStudent other = (GetInformantionStudent) obj;
 		return Objects.equals(identity, other.identity);
 	}
-
-	@Override
-	public String toString() {
-		return "Student [identity=" + identity + ", fullName=" + fullName + ", educationYear=" + educationYear + "]";
-	}
-
+	
+	
 }
