@@ -3,9 +3,14 @@
  */
 package com.testinium.service;
 
+import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
+
 import com.testinium.dto.request.AddStudentRequest;
 import com.testinium.dto.response.AddStudentResponse;
 import com.testinium.dto.response.ExamGradeAndAvarageAllStudentsResponse;
+import com.testinium.entity.Student;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -13,11 +18,14 @@ import com.testinium.dto.response.ExamGradeAndAvarageAllStudentsResponse;
  */
 public interface StudentsService {
 
-	AddStudentResponse createStudent(AddStudentRequest request);
+//	AddStudentResponse createStudent(AddStudentRequest request);
+//
+//
+//	ExamGradeAndAvarageAllStudentsResponse getAllStudentsByYearAndLessonCode(String year, String lessonCode);
 
-	String createStudent2(AddStudentRequest request);
+	ResponseEntity<Student> createStudent3(Student request);
 
-	ExamGradeAndAvarageAllStudentsResponse getAllStudentsByYearAndLessonCode(String year, String lessonCode);
+	Optional<Student> getOneStudent(String identity);
 
 	
 }

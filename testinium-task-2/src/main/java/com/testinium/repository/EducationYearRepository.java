@@ -16,6 +16,6 @@ import com.testinium.entity.Lesson;
 @Repository
 public interface EducationYearRepository extends JpaRepository<EducationYear, Long>{
 
-	EducationYear findByEducationYear(String year);
+	//EducationYear findByEducationYear(String year);
 
 }

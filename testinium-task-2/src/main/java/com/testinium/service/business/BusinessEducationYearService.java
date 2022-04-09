@@ -1,13 +1,18 @@
 package com.testinium.service.business;
 
-import java.util.Optional;
-
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.testinium.dto.request.AddStudentRequest;
+import com.testinium.dto.response.AddStudentResponse;
+import com.testinium.dto.response.ExamGradeAndAvarageAllStudentsResponse;
+import com.testinium.entity.EducationYear;
 import com.testinium.entity.Student;
+import com.testinium.repository.EducationYearRepository;
 import com.testinium.repository.StudentRepository;
+import com.testinium.service.EducationYearService;
 import com.testinium.service.StudentsService;
 
 /**
@@ -16,16 +21,33 @@ import com.testinium.service.StudentsService;
  *
  */
 @Service
-public class BusinessStudentService implements StudentsService {
+public class BusinessEducationYearService implements EducationYearService {
 
-	private StudentRepository studentRepository;
+	private EducationYearRepository educationYearRepository;
+	private ModelMapper modelMapper;
+
+	
+
 
 	/**
 	 * @param studentRepository
+	 * @param educationYearRepository
+	 * @param modelMapper
 	 */
-	public BusinessStudentService(StudentRepository studentRepository) {
-		this.studentRepository = studentRepository;
+	public BusinessEducationYearService( EducationYearRepository educationYearRepository,
+			ModelMapper modelMapper) {
+		this.educationYearRepository = educationYearRepository;
+		this.modelMapper = modelMapper;
 	}
+
+
+
+
+	@Override
+	public ResponseEntity<EducationYear> createEducationYear(EducationYear request) {
+		educationYearRepository.save(request);
+		
+		return new ResponseEntity<>(request,HttpStatus.OK);		}
 
 //	@Override
 //	public AddStudentResponse createStudent(AddStudentRequest request) {
@@ -68,21 +90,11 @@ public class BusinessStudentService implements StudentsService {
 //		else {
 //			
 //		}
-
+		
 //	return null;
 //}
 
-	@Override
-	public ResponseEntity<Student> createStudent3(Student request) {
-		studentRepository.save(request);
 
-		return new ResponseEntity<>(request, HttpStatus.OK);
-	}
 
-	@Override
-	public Optional<Student> getOneStudent(String identity) {
-		
-		return studentRepository.findById(identity);
-	}
 
 }

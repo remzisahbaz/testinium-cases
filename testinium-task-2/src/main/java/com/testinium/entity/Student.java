@@ -18,73 +18,40 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "students")
-public class Student implements Serializable{
+public class Student {
 
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	@Id
 	private String identity;
 	private String fullName;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<EducationYear> educationYear;
-
-	/**
-	 * 
-	 */
-	public Student() {
-	}
-
+	
 	/**
 	 * @return the identity
 	 */
 	public String getIdentity() {
 		return identity;
 	}
-
 	/**
 	 * @param identity the identity to set
 	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
-
 	/**
 	 * @return the fullName
 	 */
 	public String getFullName() {
 		return fullName;
 	}
-
 	/**
 	 * @param fullName the fullName to set
 	 */
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
-	/**
-	 * @return the educationYear
-	 */
-	public List<EducationYear> getEducationYear() {
-		return educationYear;
-	}
-
-	/**
-	 * @param educationYear the educationYear to set
-	 */
-	public void setEducationYear(List<EducationYear> educationYear) {
-		this.educationYear = educationYear;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(identity);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,10 +63,17 @@ public class Student implements Serializable{
 		Student other = (Student) obj;
 		return Objects.equals(identity, other.identity);
 	}
-
 	@Override
 	public String toString() {
-		return "Student [identity=" + identity + ", fullName=" + fullName + ", educationYear=" + educationYear + "]";
+		return "Student [identity=" + identity + ", fullName=" + fullName + "]";
 	}
+	/**
+	 * 
+	 */
+	public Student() {
+	}
+	
+	
 
+	
 }

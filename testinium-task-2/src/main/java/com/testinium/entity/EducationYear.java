@@ -38,68 +38,56 @@ public class EducationYear implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String year;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "educationyear_id", nullable = false)
+	@JoinColumn(name = "student_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
-	private Student lesson;
-	/**
-	 * 
-	 */
-	public EducationYear() {
-	}
-	
+	private Student student;
 	/**
 	 * @return the id
 	 */
 	public Long getId() {
 		return id;
 	}
-
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	/**
 	 * @return the year
 	 */
 	public String getYear() {
 		return year;
 	}
-
 	/**
 	 * @param year the year to set
 	 */
 	public void setYear(String year) {
 		this.year = year;
 	}
-
 	/**
-	 * @return the lesson
+	 * @return the student
 	 */
-	public List<Lesson> getLesson() {
-		return lesson;
+	public Student getStudent() {
+		return student;
 	}
-
 	/**
-	 * @param lesson the lesson to set
+	 * @param student the student to set
 	 */
-	public void setLesson(List<Lesson> lesson) {
-		this.lesson = lesson;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, year);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,13 +99,11 @@ public class EducationYear implements Serializable{
 		EducationYear other = (EducationYear) obj;
 		return Objects.equals(id, other.id) && Objects.equals(year, other.year);
 	}
-
-	@Override
-	public String toString() {
-		return "EducationYear [id=" + id + ", year=" + year + ", lesson=" + lesson + "]";
+	/**
+	 * 
+	 */
+	public EducationYear() {
 	}
-
-	
 	
 	
 }

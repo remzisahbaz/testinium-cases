@@ -16,6 +16,6 @@ import com.testinium.entity.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, String>{
 
-	GetInformantionStudent findByYear(String year);
+	//GetInformantionStudent findByYear(String year);
 
 }
