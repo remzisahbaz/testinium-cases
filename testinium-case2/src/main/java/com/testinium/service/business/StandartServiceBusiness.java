@@ -110,4 +110,22 @@ public class StandartServiceBusiness
 		return Optional.ofNullable(null);
 	}
 
+	
+	@Override
+	public Optional<String> getStudentBySchoolYearAndCourseCodeAndSchoolNo(String schoolNo, String courseCode,
+			String year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Optional<String> getAllStudentAvarageAndResultsOfExam(String courseCode, String year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Optional<String> createAnyCourseAnyStudent(String courseCode, String schoolNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
