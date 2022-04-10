@@ -1,11 +1,11 @@
 package com.testinium.service.business;
 
-import java.util.Optional;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.testinium.dto.response.AddStudentResponse;
+import com.testinium.dto.response.StudentResponse;
 import com.testinium.entity.Student;
 import com.testinium.repository.StudentRepository;
 import com.testinium.service.StudentsService;
@@ -18,71 +18,31 @@ import com.testinium.service.StudentsService;
 @Service
 public class BusinessStudentService implements StudentsService {
 
+	@Autowired
 	private StudentRepository studentRepository;
+	@Autowired
+	private ModelMapper modelMapper;
 
 	/**
 	 * @param studentRepository
+	 * @param modelMapper
 	 */
-	public BusinessStudentService(StudentRepository studentRepository) {
+	public BusinessStudentService(StudentRepository studentRepository, ModelMapper modelMapper) {
 		this.studentRepository = studentRepository;
+		this.modelMapper = modelMapper;
 	}
 
-//	@Override
-//	public AddStudentResponse createStudent(AddStudentRequest request) {
-////		var existStudent = studentRepository.existsById(request.getIdentity());
-//		if (existStudent) {
-//		} else {
-//				
-//			var newStudent= studentRepository.save(modelMapper.map(request,Student.class));
-//			return modelMapper.map(newStudent,AddStudentResponse.class);
-//		}
-//		return null;
-//	}
-
-//	@Override
-//	public String createStudent2(AddStudentRequest request) {
-//		
-//	var newStudent= studentRepository.save(modelMapper.map(request,Student.class));
-//		return "ok";
-//	}
-
-//	@Override
-//	public ExamGradeAndAvarageAllStudentsResponse getAllStudentsByYearAndLessonCode(String year, String lessonCode) {
-//		var existEducationYear= educationYearRepository.findByEducationYear(year);
-//
-//		if(existEducationYear!=null) {
-//			
-//			var getInformationSudent= studentRepository.findByYear(year);
-//				getInformationSudent.getEducationYear()
-//									.stream()
-//									.map(edu->{
-//										
-//										var getStudent= ExamGradeAndAvarageAllStudentsResponse.class;
-//										
-//										return null;
-//										
-//										
-//									})
-//									.toList();
-//		}
-//		else {
-//			
-//		}
-
-//	return null;
-//}
-
 	@Override
-	public ResponseEntity<Student> createStudent3(Student request) {
+	public AddStudentResponse createStudent3(Student request) {
 		studentRepository.save(request);
 
-		return new ResponseEntity<>(request, HttpStatus.OK);
+		return modelMapper.map(studentRepository.save(request),AddStudentResponse.class);
 	}
 
 	@Override
-	public Optional<Student> getOneStudent(String identity) {
-		
-		return studentRepository.findById(identity);
+	public StudentResponse getOneStudentByIdentity(String identity) {
+
+		return modelMapper.map(studentRepository.findById(identity), StudentResponse.class);
 	}
 
 }

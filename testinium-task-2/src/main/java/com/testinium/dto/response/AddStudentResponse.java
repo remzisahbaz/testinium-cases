@@ -1,9 +1,6 @@
 package com.testinium.dto.response;
 
-import java.util.List;
 import java.util.Objects;
-
-import com.testinium.entity.EducationYear;
 
 /**
  * 
@@ -15,9 +12,6 @@ public class AddStudentResponse {
 
 	private String identity;
 	private String fullName;
-	private List<EducationYear> educationYear;
-	
-	
 	/**
 	 * 
 	 */
@@ -47,26 +41,9 @@ public class AddStudentResponse {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-	/**
-	 * @return the educationYear
-	 */
-	public List<EducationYear> getEducationYear() {
-		return educationYear;
-	}
-	/**
-	 * @param educationYear the educationYear to set
-	 */
-	public void setEducationYear(List<EducationYear> educationYear) {
-		this.educationYear = educationYear;
-	}
-	@Override
-	public String toString() {
-		return "AddStudentRequest [identity=" + identity + ", fullName=" + fullName + ", educationYear=" + educationYear
-				+ "]";
-	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(identity);
+		return Objects.hash(fullName, identity);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -77,7 +54,12 @@ public class AddStudentResponse {
 		if (getClass() != obj.getClass())
 			return false;
 		AddStudentResponse other = (AddStudentResponse) obj;
-		return Objects.equals(identity, other.identity);
+		return Objects.equals(fullName, other.fullName) && Objects.equals(identity, other.identity);
 	}
+	@Override
+	public String toString() {
+		return "AddStudentResponse [identity=" + identity + ", fullName=" + fullName + "]";
+	}
+	
 	
 }

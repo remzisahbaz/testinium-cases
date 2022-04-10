@@ -1,19 +1,16 @@
 package com.testinium.service.business;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.testinium.dto.request.AddStudentRequest;
-import com.testinium.dto.response.AddStudentResponse;
-import com.testinium.dto.response.ExamGradeAndAvarageAllStudentsResponse;
+import com.testinium.dto.response.AddEducationYearResponse;
+import com.testinium.dto.response.EducationYearResponse;
 import com.testinium.entity.EducationYear;
 import com.testinium.entity.Student;
 import com.testinium.repository.EducationYearRepository;
 import com.testinium.repository.StudentRepository;
 import com.testinium.service.EducationYearService;
-import com.testinium.service.StudentsService;
 
 /**
  * 
@@ -23,78 +20,52 @@ import com.testinium.service.StudentsService;
 @Service
 public class BusinessEducationYearService implements EducationYearService {
 
+	@Autowired
 	private EducationYearRepository educationYearRepository;
+	@Autowired
+	private StudentRepository studentRepository;
+	@Autowired
 	private ModelMapper modelMapper;
-
-	
-
 
 	/**
 	 * @param studentRepository
 	 * @param educationYearRepository
 	 * @param modelMapper
 	 */
-	public BusinessEducationYearService( EducationYearRepository educationYearRepository,
-			ModelMapper modelMapper) {
+	public BusinessEducationYearService(EducationYearRepository educationYearRepository, ModelMapper modelMapper) {
 		this.educationYearRepository = educationYearRepository;
 		this.modelMapper = modelMapper;
 	}
 
+	@Override
+	public AddEducationYearResponse createEducationYear(EducationYear request, String identity) {
 
+		var getOneStudent=studentRepository.getOneStudentByIdentity(identity);
+			request.setStudent(modelMapper.map(getOneStudent,Student.class));
+			
+		return modelMapper.map(educationYearRepository.save(request), AddEducationYearResponse.class);
 
+	}
 
 	@Override
-	public ResponseEntity<EducationYear> createEducationYear(EducationYear request) {
-		educationYearRepository.save(request);
-		
-		return new ResponseEntity<>(request,HttpStatus.OK);		}
+	public EducationYearResponse getOneEducationYearByYear(String year) {
 
-//	@Override
-//	public AddStudentResponse createStudent(AddStudentRequest request) {
-////		var existStudent = studentRepository.existsById(request.getIdentity());
-//		if (existStudent) {
-//		} else {
-//				
-//			var newStudent= studentRepository.save(modelMapper.map(request,Student.class));
-//			return modelMapper.map(newStudent,AddStudentResponse.class);
-//		}
-//		return null;
-//	}
+		var exist = educationYearRepository.findByYear(year);
+		if (exist != null) {
 
-//	@Override
-//	public String createStudent2(AddStudentRequest request) {
-//		
-//	var newStudent= studentRepository.save(modelMapper.map(request,Student.class));
-//		return "ok";
-//	}
+			return modelMapper.map(exist,EducationYearResponse.class);
+		}
+		return null;
+	}
 
-//	@Override
-//	public ExamGradeAndAvarageAllStudentsResponse getAllStudentsByYearAndLessonCode(String year, String lessonCode) {
-//		var existEducationYear= educationYearRepository.findByEducationYear(year);
-//
-//		if(existEducationYear!=null) {
-//			
-//			var getInformationSudent= studentRepository.findByYear(year);
-//				getInformationSudent.getEducationYear()
-//									.stream()
-//									.map(edu->{
-//										
-//										var getStudent= ExamGradeAndAvarageAllStudentsResponse.class;
-//										
-//										return null;
-//										
-//										
-//									})
-//									.toList();
-//		}
-//		else {
-//			
-//		}
-		
-//	return null;
-//}
+	@Override
+	public EducationYearResponse getOneEducationYearByStudentIdentity(String identity) {
+		var exist = educationYearRepository.findByStudent(identity);
+		if (exist != null) {
 
-
-
+			return modelMapper.map(exist, EducationYearResponse.class);
+		}
+		return null;
+	}
 
 }

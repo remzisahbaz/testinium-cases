@@ -6,7 +6,7 @@ package com.testinium.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.testinium.dto.request.GetInformantionStudent;
+import com.testinium.dto.response.StudentResponse;
 import com.testinium.entity.Student;
 
 /**
@@ -16,6 +16,7 @@ import com.testinium.entity.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, String>{
 
-	//GetInformantionStudent findByYear(String year);
+	StudentResponse getOneStudentByIdentity(String identity);
+
 
 }

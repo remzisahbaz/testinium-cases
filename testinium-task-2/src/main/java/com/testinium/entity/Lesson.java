@@ -1,11 +1,12 @@
 package com.testinium.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,19 +25,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "lessons")
 public class Lesson implements Serializable {
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String code;
-	private String name;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String lessonCode;
+	private String lessonName;
 	private double firstExamResult;
 	private double secondExamResult;
 	private double avarage;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "educationyear_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -50,31 +52,45 @@ public class Lesson implements Serializable {
 	}
 
 	/**
-	 * @return the code
+	 * @return the id
 	 */
-	public String getCode() {
-		return code;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * @param code the code to set
+	 * @param id the id to set
 	 */
-	public void setCode(String code) {
-		this.code = code;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
-	 * @return the name
+	 * @return the lessonCode
 	 */
-	public String getName() {
-		return name;
+	public String getLessonCode() {
+		return lessonCode;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param lessonCode the lessonCode to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setLessonCode(String lessonCode) {
+		this.lessonCode = lessonCode;
+	}
+
+	/**
+	 * @return the lessonName
+	 */
+	public String getLessonName() {
+		return lessonName;
+	}
+
+	/**
+	 * @param lessonName the lessonName to set
+	 */
+	public void setLessonName(String lessonName) {
+		this.lessonName = lessonName;
 	}
 
 	/**
@@ -133,9 +149,16 @@ public class Lesson implements Serializable {
 		this.educationYear = educationYear;
 	}
 
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(code, educationYear);
+		return Objects.hash(id, lessonCode);
 	}
 
 	@Override
@@ -147,15 +170,15 @@ public class Lesson implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Lesson other = (Lesson) obj;
-		return Objects.equals(code, other.code) && Objects.equals(educationYear, other.educationYear);
+		return Objects.equals(id, other.id) && Objects.equals(lessonCode, other.lessonCode);
 	}
 
 	@Override
 	public String toString() {
-		return "Lesson [code=" + code + ", name=" + name + ", firstExamResult=" + firstExamResult
-				+ ", secondExamResult=" + secondExamResult + ", avarage=" + avarage + ", educationYear=" + educationYear
-				+ "]";
+		return "Lesson [id=" + id + ", lessonCode=" + lessonCode + ", lessonName=" + lessonName + ", firstExamResult="
+				+ firstExamResult + ", secondExamResult=" + secondExamResult + ", avarage=" + avarage
+				+ ", educationYear=" + educationYear + "]";
 	}
 
-
+	
 }

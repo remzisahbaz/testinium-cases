@@ -3,13 +3,9 @@
  */
 package com.testinium.service;
 
-import org.springframework.http.ResponseEntity;
-
-import com.testinium.dto.request.AddStudentRequest;
-import com.testinium.dto.response.AddStudentResponse;
-import com.testinium.dto.response.ExamGradeAndAvarageAllStudentsResponse;
+import com.testinium.dto.response.AddEducationYearResponse;
+import com.testinium.dto.response.EducationYearResponse;
 import com.testinium.entity.EducationYear;
-import com.testinium.entity.Student;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -17,6 +13,10 @@ import com.testinium.entity.Student;
  */
 public interface EducationYearService {
 
-	ResponseEntity<EducationYear> createEducationYear(EducationYear request);
+	AddEducationYearResponse createEducationYear(EducationYear request,String identity);
+
+	EducationYearResponse getOneEducationYearByYear(String year);
+
+	EducationYearResponse getOneEducationYearByStudentIdentity(String identity);
 
 }

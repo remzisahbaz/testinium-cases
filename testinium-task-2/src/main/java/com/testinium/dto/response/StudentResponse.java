@@ -1,24 +1,21 @@
-package com.testinium.dto.request;
+package com.testinium.dto.response;
 
-import java.util.List;
 import java.util.Objects;
 
-import com.testinium.entity.EducationYear;
 /**
  * 
  * @author Remzi ŞAHBAZ
  *
  */
-public class AddStudentRequest {
+public class StudentResponse {
+
 
 	private String identity;
 	private String fullName;
-	
-	
 	/**
 	 * 
 	 */
-	public AddStudentRequest() {
+	public StudentResponse() {
 	}
 	/**
 	 * @return the identity
@@ -56,12 +53,12 @@ public class AddStudentRequest {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AddStudentRequest other = (AddStudentRequest) obj;
+		StudentResponse other = (StudentResponse) obj;
 		return Objects.equals(fullName, other.fullName) && Objects.equals(identity, other.identity);
 	}
 	@Override
 	public String toString() {
-		return "AddStudentRequest [identity=" + identity + ", fullName=" + fullName + "]";
+		return "StudentResponse [identity=" + identity + ", fullName=" + fullName + "]";
 	}
 	
 	
