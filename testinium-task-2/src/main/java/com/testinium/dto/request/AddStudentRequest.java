@@ -1,27 +1,24 @@
-package com.testinium.entity;
+package com.testinium.dto.request;
 
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import com.testinium.entity.EducationYear;
 /**
+ * 
  * @author Remzi ŞAHBAZ
  *
  */
-@Entity
-@Table(name = "students")
-public class Student {
+public class AddStudentRequest {
 
-	@Id
 	private String identity;
 	private String fullName;
-
+	
+	
 	/**
 	 * 
 	 */
-	public Student() {
+	public AddStudentRequest() {
 	}
 	/**
 	 * @return the identity
@@ -29,33 +26,28 @@ public class Student {
 	public String getIdentity() {
 		return identity;
 	}
-
 	/**
 	 * @param identity the identity to set
 	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
-
 	/**
 	 * @return the fullName
 	 */
 	public String getFullName() {
 		return fullName;
 	}
-
 	/**
 	 * @param fullName the fullName to set
 	 */
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(identity);
+		return Objects.hash(fullName, identity);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -64,14 +56,13 @@ public class Student {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Student other = (Student) obj;
-		return Objects.equals(identity, other.identity);
+		AddStudentRequest other = (AddStudentRequest) obj;
+		return Objects.equals(fullName, other.fullName) && Objects.equals(identity, other.identity);
 	}
-
 	@Override
 	public String toString() {
-		return "Student [identity=" + identity + ", fullName=" + fullName + "]";
+		return "AddStudentRequest [identity=" + identity + ", fullName=" + fullName + "]";
 	}
-
-
+	
+	
 }

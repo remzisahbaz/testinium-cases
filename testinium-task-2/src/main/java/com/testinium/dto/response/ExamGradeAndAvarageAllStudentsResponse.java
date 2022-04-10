@@ -1,27 +1,28 @@
-package com.testinium.entity;
+/**
+ * 
+ */
+package com.testinium.dto.response;
 
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.testinium.entity.Lesson;
 
 /**
  * @author Remzi ŞAHBAZ
  *
  */
-@Entity
-@Table(name = "students")
-public class Student {
+public class ExamGradeAndAvarageAllStudentsResponse {
 
-	@Id
 	private String identity;
 	private String fullName;
-
+	private List<Lesson> lesson;
+	
+	
 	/**
 	 * 
 	 */
-	public Student() {
+	public ExamGradeAndAvarageAllStudentsResponse() {
 	}
 	/**
 	 * @return the identity
@@ -29,33 +30,40 @@ public class Student {
 	public String getIdentity() {
 		return identity;
 	}
-
 	/**
 	 * @param identity the identity to set
 	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
-
 	/**
 	 * @return the fullName
 	 */
 	public String getFullName() {
 		return fullName;
 	}
-
 	/**
 	 * @param fullName the fullName to set
 	 */
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-
+	/**
+	 * @return the lesson
+	 */
+	public List<Lesson> getLesson() {
+		return lesson;
+	}
+	/**
+	 * @param lesson the lesson to set
+	 */
+	public void setLesson(List<Lesson> lesson) {
+		this.lesson = lesson;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(identity);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -64,14 +72,14 @@ public class Student {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Student other = (Student) obj;
+		ExamGradeAndAvarageAllStudentsResponse other = (ExamGradeAndAvarageAllStudentsResponse) obj;
 		return Objects.equals(identity, other.identity);
 	}
-
 	@Override
 	public String toString() {
-		return "Student [identity=" + identity + ", fullName=" + fullName + "]";
+		return "ExamGradeAndAvarageAllStudentsResponse [identity=" + identity + ", fullName=" + fullName + ", lesson="
+				+ lesson + "]";
 	}
 
-
+	
 }
