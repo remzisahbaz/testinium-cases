@@ -3,6 +3,8 @@
  */
 package com.testinium.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +27,7 @@ public class Course {
 	@Id
 	private String courseCode;
 	private String courseName;
-	@OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<CourseRegistration> courseRegistration;
 	/**

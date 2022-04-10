@@ -10,33 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.testinium.entity.Student;
 import com.testinium.repository.StudentRepository;
+import com.testinium.service.business.StudentServiceBusiness;
 
 /**
- * @author remzi ŞAHBAZ
+ * @author Remzi ŞAHBAZ
  *
  */
 public class demoDatabase {
 
-	@Autowired
-	private StudentRepository studentRepository;
-	
-	
-	public Map<Integer, Student> students() {
+	private StudentServiceBusiness servis;
 
-		Map<Integer, Student> list = new HashMap<>();
-		var s= new Student();
-			s.setSchoolNo("A1001");
-			s.setFullName("Remzi ŞAHBAZ");
-		studentRepository.save(s);
-		
+	public void students() {
+
+		Map<Long, Student> list = new HashMap<>();
+		var s = new Student();
+		s.setSchoolNo("A1001");
+		s.setFullName("Remzi ŞAHBAZ");
+		servis.createStudent(s);
+
 		s.setSchoolNo("A1002");
 		s.setFullName("Elif ŞAHBAZ");
-	studentRepository.save(s);
-		
+
+		servis.createStudent(s);
 		s.setSchoolNo("A1003");
 		s.setFullName("Beyza ŞAHBAZ");
-	studentRepository.save(s);
-			
-	return list;
+
+		servis.createStudent(s);
+		list.put(1L, s);
+
+		
+
 	}
 }

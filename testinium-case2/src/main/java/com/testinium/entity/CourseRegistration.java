@@ -33,17 +33,17 @@ public class CourseRegistration {
 	private String yearCode;
 	private boolean state;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "student_id")
 	private Student student;
 	
-//	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
-//	@JoinColumn(name = "resulstofexam_id", referencedColumnName = "id")
-//	@JsonIgnore
-//	private ResulstOfExam resulstOfExam;
-//	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "course_code")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
+	@JoinColumn(name = "id")
+	@JsonIgnore
+	private ResulstOfExam resulstOfExam;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "courseCode")
 	private Course course;
 
 	/**

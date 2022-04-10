@@ -25,7 +25,7 @@ public class Student {
 	@Id
 	private String schoolNo;
 	private String fullName;
-	@OneToMany(mappedBy = "student",fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<CourseRegistration> courseRegistration;
 	/**

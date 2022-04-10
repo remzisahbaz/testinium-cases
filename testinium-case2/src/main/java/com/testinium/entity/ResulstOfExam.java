@@ -29,11 +29,11 @@ public class ResulstOfExam {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-//	@OneToOne(mappedBy = "resulstofexam", 
-//			fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private CourseRegistration courseRegistration;
-//	
+	@OneToOne(
+			fetch = FetchType.LAZY)
+	@JsonIgnore
+	private CourseRegistration courseRegistration;
+	
 	private String firstExamResult;
 	private String secondExamResult;
 	private double avarage;
