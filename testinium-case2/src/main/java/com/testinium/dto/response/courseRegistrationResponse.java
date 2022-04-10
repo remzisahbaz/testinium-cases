@@ -4,7 +4,7 @@
 package com.testinium.dto.response;
 
 import com.testinium.entity.Course;
-import com.testinium.entity.ResulstOfExam;
+import com.testinium.entity.ResultsOfExam;
 import com.testinium.entity.Student;
 
 import lombok.Builder;
@@ -23,6 +23,6 @@ public class courseRegistrationResponse {
 	private String yearCode;
 	private boolean state;
 	private Student student;
-	private ResulstOfExam resulstOfExam;
+	private ResultsOfExam resultsOfExam;
 	private Course course;
 }

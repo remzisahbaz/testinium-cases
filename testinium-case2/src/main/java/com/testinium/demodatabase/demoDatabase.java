@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.testinium.entity.Student;
 import com.testinium.repository.StudentRepository;
-import com.testinium.service.business.StudentServiceBusiness;
+import com.testinium.service.business.StandartServiceBusiness;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -18,7 +18,7 @@ import com.testinium.service.business.StudentServiceBusiness;
  */
 public class demoDatabase {
 
-	private StudentServiceBusiness servis;
+	private StandartServiceBusiness servis;
 
 	public void students() {
 

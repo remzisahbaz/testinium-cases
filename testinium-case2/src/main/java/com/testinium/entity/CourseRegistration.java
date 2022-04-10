@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  */
 @Entity
-@Table(name = "courseRegistration")
+@Table(name = "course_registration")
 
 public class CourseRegistration {
 
@@ -34,13 +34,13 @@ public class CourseRegistration {
 	private boolean state;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "student_id")
+	@JoinColumn(name = "school_no")
 	private Student student;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "resultexam_id")
 	@JsonIgnore
-	private ResulstOfExam resulstOfExam;
+	private ResultsOfExam resultsOfExam;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "courseCode")
@@ -109,17 +109,17 @@ public class CourseRegistration {
 	}
 
 	/**
-	 * @return the resulstOfExam
+	 * @return the resultsOfExam
 	 */
-	public ResulstOfExam getResulstOfExam() {
-		return resulstOfExam;
+	public ResultsOfExam getResulstOfExam() {
+		return resultsOfExam;
 	}
 
 	/**
-	 * @param resulstOfExam the resulstOfExam to set
+	 * @param resultsOfExam the resultsOfExam to set
 	 */
-	public void setResulstOfExam(ResulstOfExam resulstOfExam) {
-		this.resulstOfExam = resulstOfExam;
+	public void setResulstOfExam(ResultsOfExam resultsOfExam) {
+		this.resultsOfExam = resultsOfExam;
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class CourseRegistration {
 	@Override
 	public String toString() {
 		return "CourseRegistration [id=" + id + ", yearCode=" + yearCode + ", state=" + state + ", student=" + student
-				+ ", resulstOfExam=" + resulstOfExam + ", course=" + course + "]";
+				+ ", resultsOfExam=" + resultsOfExam + ", course=" + course + "]";
 	}
 	
 	
