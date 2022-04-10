@@ -11,8 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import com.testinium.dto.request.AddLessonRequest;
 import com.testinium.dto.request.AddStudentRequest;
 import com.testinium.dto.response.AddEducationYearResponse;
+import com.testinium.dto.response.AddLessonResponse;
 import com.testinium.dto.response.AddStudentResponse;
 import com.testinium.dto.response.EducationYearResponse;
+import com.testinium.dto.response.LessonResponse;
 import com.testinium.dto.response.StudentResponse;
 import com.testinium.entity.EducationYear;
 import com.testinium.entity.Lesson;
@@ -45,6 +47,62 @@ public class ModelMapperConfiguration {
 		lesson.setSecondExamResult(request.getSecondExamResult());
 		lesson.setEducationYear(request.getEducationYear());
 
+		return lesson;
+	};
+	private static final Converter<AddLessonResponse, Lesson> AddLessonResponse_Convert_To_Lesson = (context) -> {
+		var response = context.getSource();
+		var lesson = context.getDestination();
+		
+		lesson.setId(response.getId());
+		lesson.setAvarage(response.getAvarage());
+		lesson.setLessonCode(response.getLessonCode());
+		lesson.setFirstExamResult(response.getFirstExamResult());
+		lesson.setLessonName(response.getLessonName());
+		lesson.setSecondExamResult(response.getSecondExamResult());
+		lesson.setEducationYear(response.getEducationYear());
+		
+		return lesson;
+	};
+	private static final Converter<Lesson, AddLessonResponse> Lesson_Convert_To_AddLessonResponse = (context) -> {
+		var lesson = context.getSource();
+		var response = context.getDestination();
+		
+		response.setId(lesson.getId());
+		response.setAvarage(lesson.getAvarage());
+		response.setLessonCode(lesson.getLessonCode());
+		response.setFirstExamResult(lesson.getFirstExamResult());
+		response.setLessonName(lesson.getLessonName());
+		response.setSecondExamResult(lesson.getSecondExamResult());
+		response.setEducationYear(lesson.getEducationYear());
+		
+		return response;
+	};
+	private static final Converter<Lesson, LessonResponse> Lesson_Convert_To_LessonResponse = (context) -> {
+		var lesson = context.getSource();
+		var response = context.getDestination();
+		
+		response.setId(lesson.getId());
+		response.setAvarage(lesson.getAvarage());
+		response.setLessonCode(lesson.getLessonCode());
+		response.setFirstExamResult(lesson.getFirstExamResult());
+		response.setLessonName(lesson.getLessonName());
+		response.setSecondExamResult(lesson.getSecondExamResult());
+		response.setEducationYear(lesson.getEducationYear());
+		
+		return response;
+	};
+	private static final Converter<LessonResponse, Lesson> LessonResponse_Convert_To_Lesson = (context) -> {
+		var response = context.getSource();
+		var lesson = context.getDestination();
+		
+		lesson.setId(response.getId());
+		lesson.setAvarage(response.getAvarage());
+		lesson.setLessonCode(response.getLessonCode());
+		lesson.setFirstExamResult(response.getFirstExamResult());
+		lesson.setLessonName(response.getLessonName());
+		lesson.setSecondExamResult(response.getSecondExamResult());
+		lesson.setEducationYear(response.getEducationYear());
+		
 		return lesson;
 	};
 
@@ -138,12 +196,18 @@ public class ModelMapperConfiguration {
 		var mapper = new ModelMapper();
 //		mapper.addConverter(InformantionOfStudent_Convert_To_LessonsOfStudent, GetInformantionStudent.class, ExamGradeAndAvarageAllStudentsResponse.class);
 		mapper.addConverter(AddLessonRequest_Convert_To_Lesson, AddLessonRequest.class, Lesson.class);
+		mapper.addConverter(AddLessonResponse_Convert_To_Lesson, AddLessonResponse.class, Lesson.class);
+		mapper.addConverter(Lesson_Convert_To_AddLessonResponse, Lesson.class, AddLessonResponse.class);
+		mapper.addConverter(Lesson_Convert_To_LessonResponse, Lesson.class, LessonResponse.class);
+		mapper.addConverter(LessonResponse_Convert_To_Lesson, LessonResponse.class, Lesson.class);
+		
 		mapper.addConverter(EducationYearResponse_Convert_To_EducationYear, EducationYearResponse.class,
 				EducationYear.class);
 		mapper.addConverter(EducationYear_Convert_To_EducationYearResponse, EducationYear.class,
 				EducationYearResponse.class);
 		mapper.addConverter(EducationYear_Convert_To_AddEducationYearResponse, EducationYear.class,
 				AddEducationYearResponse.class);
+		
 		mapper.addConverter(AddStudentResponse_Convert_To_Student, AddStudentResponse.class, Student.class);
 		mapper.addConverter(Student_Convert_To_AddStudentResponse, Student.class, AddStudentResponse.class);
 		mapper.addConverter(Student_Convert_To_AddStudentRequest, Student.class, AddStudentRequest.class);

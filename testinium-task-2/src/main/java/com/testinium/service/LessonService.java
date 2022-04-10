@@ -3,10 +3,8 @@
  */
 package com.testinium.service;
 
-import org.springframework.http.ResponseEntity;
-
 import com.testinium.dto.request.AddLessonRequest;
-import com.testinium.entity.Lesson;
+import com.testinium.dto.response.AddLessonResponse;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -14,6 +12,6 @@ import com.testinium.entity.Lesson;
  */
 public interface LessonService {
 
-	ResponseEntity<Lesson> createLesson(String identity, String year, AddLessonRequest request);
+	AddLessonResponse createLesson(String identity, String year, AddLessonRequest request);
 
 }

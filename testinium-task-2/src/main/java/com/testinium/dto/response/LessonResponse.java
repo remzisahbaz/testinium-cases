@@ -19,7 +19,7 @@ import com.testinium.entity.EducationYear;
  * @author Remzi ŞAHABZ
  *
  */
-public class AddLessonResponse {
+public class LessonResponse {
 
 	private Long id;
 	private String lessonCode;
@@ -31,7 +31,7 @@ public class AddLessonResponse {
 	/**
 	 * 
 	 */
-	public AddLessonResponse() {
+	public LessonResponse() {
 	}
 	/**
 	 * @return the id
@@ -129,12 +129,12 @@ public class AddLessonResponse {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AddLessonResponse other = (AddLessonResponse) obj;
+		LessonResponse other = (LessonResponse) obj;
 		return Objects.equals(id, other.id) && Objects.equals(lessonCode, other.lessonCode);
 	}
 	@Override
 	public String toString() {
-		return "AddLessonResponse [lessonCode=" + lessonCode + ", LessonName=" + LessonName + ", firstExamResult="
+		return "LessonResponse [lessonCode=" + lessonCode + ", LessonName=" + LessonName + ", firstExamResult="
 				+ firstExamResult + ", secondExamResult=" + secondExamResult + ", avarage=" + avarage
 				+ ", educationYear=" + educationYear + "]";
 	}

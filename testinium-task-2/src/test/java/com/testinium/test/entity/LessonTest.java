@@ -38,7 +38,7 @@ public class LessonTest {
 		
 		var lesson= new Lesson();
 		lesson.setId(id);
-		lesson.setName(LessonName);
+		lesson.setLessonName(LessonName);
 		lesson.setLessonCode(lessonCode);
 		lesson.setFirstExamResult(firstExamResult);
 		lesson.setSecondExamResult(secondExamResult);
@@ -46,7 +46,7 @@ public class LessonTest {
 		lesson.setEducationYear(educationYear);
 		
 		assertEquals(lesson.getId(), id);
-		assertEquals(lesson.getName(), LessonName);
+		assertEquals(lesson.getLessonName(), LessonName);
 		assertEquals(lesson.getLessonCode(), lessonCode);
 		assertEquals(lesson.getFirstExamResult(), firstExamResult);
 		assertEquals(lesson.getSecondExamResult(), secondExamResult);
