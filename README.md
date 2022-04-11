@@ -5,7 +5,7 @@
 
 
 
-# java project BUILD
+# java Spring project [BUILD]
 ____________________________________________________________________________________________________
 		project->Run As->
 				Maven Build
