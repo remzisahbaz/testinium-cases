@@ -58,5 +58,17 @@ ________________________________________________________________________________
 				command -> docker run --cpus=0.50 --name instanceName --rm -p 1072:1071 -d -docker image file name-   
 
 
-			****create docker network then create mysql image***
+# ****create docker network then create mysql image***
+			
+			command-> docker network create newNetwotkName
+			
+			command-> docker pull mysql
+			....downloading mysql file for mysql image...
+			
+			***create new mysql instance
+			command-> docker run --network=NetwotkName  --name newMysqlInstanceName --rm -p 3306:3306 -d mysql
+			
+			command-< docker run -e "SPRINGDATASOURCE_URL=
+			jdbc:mysql://MysqlInstanceName:3306/databseName?usePublicKeyRetrieval=true&useSSL=false"
+			--network=NetwotkName --name newInstanceName --rm -p outPort:inPort -i  dockerImageName
 			
