@@ -21,10 +21,10 @@ public class CourseRegistrationRequest {
 
 
 	private String yearCode;
+	private String courseCode;
 	private boolean state;
 	private String schoolNo;
-	private Long resultsofexam_id;
-	private String courseCode;
+	private Long resultsofexamId;
 	/**
 	 * 
 	 */
@@ -67,16 +67,16 @@ public class CourseRegistrationRequest {
 		this.schoolNo = schoolNo;
 	}
 	/**
-	 * @return the resultsofexam_id
+	 * @return the resultsofexamId
 	 */
 	public Long getResultsofexam_id() {
-		return resultsofexam_id;
+		return resultsofexamId;
 	}
 	/**
-	 * @param resultsofexam_id the resultsofexam_id to set
+	 * @param resultsofexamId the resultsofexamId to set
 	 */
 	public void setResultsofexam_id(Long resultsofexam_id) {
-		this.resultsofexam_id = resultsofexam_id;
+		this.resultsofexamId = resultsofexam_id;
 	}
 	/**
 	 * @return the courseCode
@@ -92,7 +92,7 @@ public class CourseRegistrationRequest {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(courseCode, resultsofexam_id, yearCode);
+		return Objects.hash(courseCode, resultsofexamId, yearCode);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -103,13 +103,13 @@ public class CourseRegistrationRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		CourseRegistrationRequest other = (CourseRegistrationRequest) obj;
-		return Objects.equals(courseCode, other.courseCode) && Objects.equals(resultsofexam_id, other.resultsofexam_id)
+		return Objects.equals(courseCode, other.courseCode) && Objects.equals(resultsofexamId, other.resultsofexamId)
 				&& Objects.equals(yearCode, other.yearCode);
 	}
 	@Override
 	public String toString() {
 		return "CourseRegistrationRequest [yearCode=" + yearCode + ", state=" + state + ", schoolNo=" + schoolNo
-				+ ", resultsofexam_id=" + resultsofexam_id + ", courseCode=" + courseCode + "]";
+				+ ", resultsofexamId=" + resultsofexamId + ", courseCode=" + courseCode + "]";
 	}
 	
 	
