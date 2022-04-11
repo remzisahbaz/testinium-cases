@@ -1,7 +1,8 @@
 # testinium-cases
 
 
-[BUILD]
+java project BUILD
+___________________________________________________________________
 project->Run As->
 				Maven Build
 				->Main >Goals="clean install spring-boot:run"
@@ -17,9 +18,8 @@ project->Run As->Run Configuration
 project->Run As->				
 				spring devtools client->
 									Main->
-									Goals="clean install spring-boot:repackage"
-									
-	then							
+									Goals="clean install spring-boot:repackage"						______________________________________________________________________________________________	
+then							
  	find project->.jar file	
 			using this direction
 				and add Dockerfile  //->not file format
