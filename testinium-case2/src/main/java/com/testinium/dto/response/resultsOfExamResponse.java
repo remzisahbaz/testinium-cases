@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class resultsOfExamResponse {
+public class ResultsOfExamResponse {
 	
 	private Course course;
 	private String firstExamResult;

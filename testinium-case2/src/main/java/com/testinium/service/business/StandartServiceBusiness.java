@@ -1,5 +1,6 @@
 package com.testinium.service.business;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.testinium.repository.CourseRegistrationRepository;
 import com.testinium.repository.CourseRepository;
 import com.testinium.repository.ResultsOfExamRepository;
 import com.testinium.repository.StudentRepository;
+import com.testinium.response.getInformantionAllStudentResponse;
 import com.testinium.service.CourseRegistrationService;
 import com.testinium.service.CourseService;
 import com.testinium.service.ResultsOfExamService;
@@ -118,7 +120,7 @@ public class StandartServiceBusiness
 		return null;
 	}
 	@Override
-	public Optional<String> getAllStudentAvarageAndResultsOfExam(String courseCode, String year) {
+	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(String courseCode, String year) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @Builder
 
-public class courseRegistrationResponse {
+public class CourseRegistrationResponse {
 
 	private Long id;
 	private String yearCode;

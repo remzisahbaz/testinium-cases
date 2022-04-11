@@ -16,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class courseResponse {
+public class CourseResponse {
 
 	private String courseCode;
 	private String courseName;
