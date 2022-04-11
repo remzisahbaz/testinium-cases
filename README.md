@@ -1,9 +1,13 @@
-# testinium-cases
+# 
 
 
-java project BUILD
-___________________________________________________________________
-project->Run As->
+
+
+
+
+# java project BUILD
+____________________________________________________________________________________________________
+		project->Run As->
 				Maven Build
 				->Main >Goals="clean install spring-boot:run"
 										&&
@@ -11,15 +15,19 @@ project->Run As->
 				->JRE ->VM arguments:"-Dmaven.test.skip=true"  //skip tests
 				
 
-project->Run As->Run Configuration
-								->JRE-< VM arguments="-Dmaven.test.skip=true" //skip test
+		project->Run As->Run Configuration
+						->JRE->
+						 VM arguments="-Dmaven.test.skip=true" //skip test
 				
 				
-project->Run As->				
+		project->Run As->				
 				spring devtools client->
-									Main->
-									Goals="clean install spring-boot:repackage"						______________________________________________________________________________________________	
-then							
+							Main->
+							Goals="clean install spring-boot:repackage"
+		
+# Docker
+______________________________________________________________________________________________	
+	then							
  	find project->.jar file	
 			using this direction
 				and add Dockerfile  //->not file format
