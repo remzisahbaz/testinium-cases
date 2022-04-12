@@ -1,3 +1,11 @@
+
+# Tested with Postman App.
+# 
+![Ekran görüntüsü 2022-04-13 021813](https://user-images.githubusercontent.com/75884873/163071368-3192d6fd-be6a-462f-b1f1-ac357d328925.png)
+![Ekran görüntüsü 2022-04-13 021938](https://user-images.githubusercontent.com/75884873/163071369-ecce06bf-5858-4d38-a840-e65aa37bd06a.png)
+![Ekran görüntüsü 2022-04-13 022108](https://user-images.githubusercontent.com/75884873/163071371-fb006c88-f892-4bb6-b279-3aeea5617714.png)
+![Ekran görüntüsü 2022-04-13 022159](https://user-images.githubusercontent.com/75884873/163071375-0a83757f-d623-4269-81ad-4890fd804941.png)
+![Ekran görüntüsü 2022-04-13 022242](https://user-images.githubusercontent.com/75884873/163071378-9c4c6731-2840-4991-86dd-062ab5de545b.png)
 # 
 
 
