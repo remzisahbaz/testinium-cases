@@ -1,133 +1,123 @@
 /**
  * 
  */
-package com.testinium.dto.response;
+package com.testinium.dto.request;
 
 import java.util.Objects;
 
 import com.testinium.entity.Course;
-import com.testinium.entity.Student;
+
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * @author Remzi ŞAHBAZ
  *
  */
 
-public class ResultsOfExamResponse {
+public class ResultsOfExamRequest {
+	
+	private String  yearCode;
+	private String schoolNo;
+	private String courseCode;
 
-	private Course course;
-	private Student student;
 	private Double firstExamResult;
 	private Double secondExamResult;
 	private Double avarage;
 	private boolean stateOfResult;
-
 	/**
 	 * 
 	 */
-	public ResultsOfExamResponse() {
+	public ResultsOfExamRequest() {
 	}
-
 	/**
-	 * @return the course
+	 * @return the yearCode
 	 */
-	public Course getCourse() {
-		return course;
+	public String getYearCode() {
+		return yearCode;
 	}
-
 	/**
-	 * @param course the course to set
+	 * @param yearCode the yearCode to set
 	 */
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setYearCode(String yearCode) {
+		this.yearCode = yearCode;
 	}
-
 	/**
-	 * @return the student
+	 * @return the schoolNo
 	 */
-	public Student getStudent() {
-		return student;
+	public String getSchoolNo() {
+		return schoolNo;
 	}
-
 	/**
-	 * @param student the student to set
+	 * @param schoolNo the schoolNo to set
 	 */
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setSchoolNo(String schoolNo) {
+		this.schoolNo = schoolNo;
 	}
-
+	/**
+	 * @return the courseCode
+	 */
+	public String getCourseCode() {
+		return courseCode;
+	}
+	/**
+	 * @param courseCode the courseCode to set
+	 */
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
 	/**
 	 * @return the firstExamResult
 	 */
 	public Double getFirstExamResult() {
 		return firstExamResult;
 	}
-
 	/**
 	 * @param firstExamResult the firstExamResult to set
 	 */
 	public void setFirstExamResult(Double firstExamResult) {
 		this.firstExamResult = firstExamResult;
 	}
-
 	/**
 	 * @return the secondExamResult
 	 */
 	public Double getSecondExamResult() {
 		return secondExamResult;
 	}
-
 	/**
 	 * @param secondExamResult the secondExamResult to set
 	 */
 	public void setSecondExamResult(Double secondExamResult) {
 		this.secondExamResult = secondExamResult;
 	}
-
 	/**
 	 * @return the avarage
 	 */
 	public Double getAvarage() {
 		return avarage;
 	}
-
 	/**
 	 * @param avarage the avarage to set
 	 */
 	public void setAvarage(Double avarage) {
 		this.avarage = avarage;
 	}
-
 	/**
 	 * @return the stateOfResult
 	 */
 	public boolean isStateOfResult() {
 		return stateOfResult;
 	}
-
 	/**
 	 * @param stateOfResult the stateOfResult to set
 	 */
 	public void setStateOfResult(boolean stateOfResult) {
 		this.stateOfResult = stateOfResult;
 	}
-
-	@Override
-	public String toString() {
-		return "ResultsOfExamResponse "
-				+ "student=" + student
-			//	+ "[" + "course=" + course + ", " 
-				+ 
-				", " + "firstExamResult="
-				+ firstExamResult + ", secondExamResult=" + secondExamResult + ", avarage=" + avarage
-				+ ", stateOfResult=" + stateOfResult + "]";
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(course, student);
+		return Objects.hash(courseCode, schoolNo, yearCode);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -136,8 +126,19 @@ public class ResultsOfExamResponse {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ResultsOfExamResponse other = (ResultsOfExamResponse) obj;
-		return Objects.equals(course, other.course) && Objects.equals(student, other.student);
+		ResultsOfExamRequest other = (ResultsOfExamRequest) obj;
+		return Objects.equals(courseCode, other.courseCode) && Objects.equals(schoolNo, other.schoolNo)
+				&& Objects.equals(yearCode, other.yearCode);
 	}
-
+	@Override
+	public String toString() {
+		return "ResultsOfExamRequest [yearCode=" + yearCode + ", schoolNo=" + schoolNo + ", courseCode=" + courseCode
+				+ ", firstExamResult=" + firstExamResult + ", secondExamResult=" + secondExamResult + ", avarage="
+				+ avarage + ", stateOfResult=" + stateOfResult + "]";
+	}
+	
+	
+	
+	
+	
 }

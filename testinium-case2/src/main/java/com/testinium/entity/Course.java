@@ -3,8 +3,6 @@
  */
 package com.testinium.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -22,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "courses")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Course {
 
 	@Id
@@ -30,11 +30,36 @@ public class Course {
 	@OneToMany(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<CourseRegistration> courseRegistration;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Set<ResultsOfExam> resultsOfExam;
+	
+	
 	/**
 	 * 
 	 */
 	public Course() {
 	}
+	
+	
+	
+	/**
+	 * @return the resultsOfExam
+	 */
+	public Set<ResultsOfExam> getResultsOfExam() {
+		return resultsOfExam;
+	}
+
+	/**
+	 * @param resultsOfExam the resultsOfExam to set
+	 */
+	public void setResultsOfExam(Set<ResultsOfExam> resultsOfExam) {
+		this.resultsOfExam = resultsOfExam;
+	}
+
+
+
 	/**
 	 * @return the courseCode
 	 */
@@ -86,11 +111,14 @@ public class Course {
 		Course other = (Course) obj;
 		return Objects.equals(courseCode, other.courseCode) && Objects.equals(courseName, other.courseName);
 	}
+
+
+
 	@Override
 	public String toString() {
 		return "Course [courseCode=" + courseCode + ", courseName=" + courseName + ", courseRegistration="
-				+ courseRegistration + "]";
+				+ courseRegistration + ", resultsOfExam=" + resultsOfExam + "]";
 	}
-	
+
 	
 }
