@@ -1,9 +1,6 @@
 package com.testinium.service.business;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,15 +133,17 @@ public class StandartServiceBusiness
 				var findCourseRegistration = courseRegistrationRepository.findByStudentAndCourseAndYearCode(
 						existStudent.get(), existCourse.get(), request.getYearCode());
 				
-				System.out.println("before save------------------servis busines" + findCourseRegistration);
 			
 				
 				resultOf.setCourseRegistration(findCourseRegistration.get());
+				System.out.println("before save------------------servis busines" + findCourseRegistration);
 
 				
 				// save new resultsOfExam
 				var saveResults = resultsOfExamRepository.save(resultOf);
-
+				findCourseRegistration.get().setResultsOfExam(saveResults);
+				saveResults = resultsOfExamRepository.save(resultOf);
+				
 				System.out.println("after save------------------servis busines");
 				// resultof->converter->response
 				var resultResponse = modelMapper.map(saveResults, ResultsOfExamResponse.class);
@@ -172,11 +171,14 @@ public class StandartServiceBusiness
 			if (!existCourse.isEmpty()) {
 
 				var existCourseRegisration = courseRegistrationRepository
-						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year);
+						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year).stream().map(c->{
+							System.out.println(""+ c.getResultsOfExam());
+							return null;});
 
-				System.out.println("***------**-*-*--"+existCourseRegisration.get());
+			//	System.out.println("***------**-*-*--"+existCourseRegisration.get());
+				
 
-				return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
+			//	return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
 
 			}
 		}
@@ -185,7 +187,7 @@ public class StandartServiceBusiness
 	}
 
 	@Override
-	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(String courseCode,
+	public Optional<getInformantionAllStudentResponse> getAllStudentAvarageAndResultsOfExam(String courseCode,
 			String year) {
 		// TODO Auto-generated method stub
 		return null;

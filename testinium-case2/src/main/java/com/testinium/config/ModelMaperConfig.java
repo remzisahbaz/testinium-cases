@@ -73,19 +73,20 @@ public class ModelMaperConfig {
 				
 				response.setStudent(course.getStudent());
 				
-				System.out.println("-->resultof-----"+course.getStudent());	
-				course.getResultsOfExam().stream()
-										.map(
-											result->{
-												
-												var resultof= new ResultsOfExam();
-													
-												response.setGradeName(result.getCourse().getCourseName());
-												response.setGradAvarage(result.getAvarage());
-												
-												return null;
-											}				);
+				System.out.println("-->avarage-----"+course.getResultsOfExam());	
 				
+//				course.getResultsOfExam().stream()
+//										.map(
+//											result->{
+//												
+//												var resultof= new ResultsOfExam();
+//													
+//												response.setGradeName(result.getCourse().getCourseName());
+//												response.setGradAvarage(result.getAvarage());
+//												
+//												return null;
+//											}				);
+//				
 				return response;
 			};
 
