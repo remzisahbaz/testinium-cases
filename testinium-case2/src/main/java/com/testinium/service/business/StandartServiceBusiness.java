@@ -1,9 +1,6 @@
 package com.testinium.service.business;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,7 +182,7 @@ public class StandartServiceBusiness
 	}
 
 	@Override
-	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(String courseCode,
+	public Optional<getInformantionAllStudentResponse> getAllStudentAvarageAndResultsOfExam(String courseCode,
 			String year) {
 		// TODO Auto-generated method stub
 		return null;

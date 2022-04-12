@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,8 +35,10 @@ public class ResultsOfExam  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToMany(mappedBy="resultsOfExam")
-	private Set<CourseRegistration> courseRegistration=new HashSet<>();
+	//@ManyToMany(mappedBy="resultsOfExam")
+	@OneToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="courseRegistration_id")
+	private CourseRegistration courseRegistration;
 	
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
 	private Course course;
@@ -64,13 +67,13 @@ public class ResultsOfExam  {
 	/**
 	 * @return the courseRegistration
 	 */
-	public Set<CourseRegistration> getCourseRegistration() {
+	public CourseRegistration getCourseRegistration() {
 		return courseRegistration;
 	}
 	/**
 	 * @param courseRegistration the courseRegistration to set
 	 */
-	public void setCourseRegistration(Set<CourseRegistration> courseRegistration) {
+	public void setCourseRegistration(CourseRegistration courseRegistration) {
 		this.courseRegistration = courseRegistration;
 	}
 	/**

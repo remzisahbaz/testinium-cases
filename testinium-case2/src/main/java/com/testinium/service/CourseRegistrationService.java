@@ -3,7 +3,6 @@
  */
 package com.testinium.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.testinium.dto.request.CourseRegistrationRequest;
@@ -21,7 +20,7 @@ public interface CourseRegistrationService {
 
 	Optional<InformationStudentResponse> getStudentBySchoolYearAndCourseCodeAndSchoolNo(String schoolNo, String courseCode, String year);
 
-	Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(String courseCode, String year);
+	Optional<getInformantionAllStudentResponse> getAllStudentAvarageAndResultsOfExam(String courseCode, String year);
 
 	Optional<String> createAnyCourseAnyStudent(String courseCode, String schoolNo);
 

@@ -23,7 +23,7 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
 
 
 
-	Optional<Set<CourseRegistration>> findByStudentAndCourseAndYearCode(Student student, Course course, String yearCode);
+	Optional<CourseRegistration> findByStudentAndCourseAndYearCode(Student student, Course course, String yearCode);
 
 }
 

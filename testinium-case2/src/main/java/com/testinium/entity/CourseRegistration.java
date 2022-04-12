@@ -3,22 +3,18 @@
  */
 package com.testinium.entity;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -39,14 +35,16 @@ public class CourseRegistration {
 	@JoinColumn(name = "school_no")
 	private Student student;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "ResultsOfExam_CourseRegistration",
-			joinColumns = { @JoinColumn(name = "course_registration_Id") },
-			inverseJoinColumns = { @JoinColumn(name = "ResultsOfExam_Id")
-			})
-	@JsonIgnore
-	private Set<ResultsOfExam> resultsOfExam = new HashSet<>();
-
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "ResultsOfExam_CourseRegistration",
+//			joinColumns = { @JoinColumn(name = "course_registration_Id") },
+//			inverseJoinColumns = { @JoinColumn(name = "ResultsOfExam_Id")
+//			})
+//	@JoinColumn(name = "ResultsOfExam_Id")
+	
+	@OneToOne(mappedBy="courseRegistration" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private ResultsOfExam resultsOfExam ;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "courseCode")
 	private Course course;
@@ -116,14 +114,14 @@ public class CourseRegistration {
 	/**
 	 * @return the resultsOfExam
 	 */
-	public Set<ResultsOfExam> getResultsOfExam() {
+	public ResultsOfExam getResultsOfExam() {
 		return resultsOfExam;
 	}
 
 	/**
 	 * @param resultsOfExam the resultsOfExam to set
 	 */
-	public void setResultsOfExam(Set<ResultsOfExam> resultsOfExam) {
+	public void setResultsOfExam(ResultsOfExam resultsOfExam) {
 		this.resultsOfExam = resultsOfExam;
 	}
 
