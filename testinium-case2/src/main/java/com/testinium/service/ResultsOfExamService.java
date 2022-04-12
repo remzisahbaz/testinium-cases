@@ -5,7 +5,8 @@ package com.testinium.service;
 
 import java.util.Optional;
 
-import com.testinium.entity.ResultsOfExam;
+import com.testinium.dto.request.ResultsOfExamRequest;
+import com.testinium.dto.response.ResultsOfExamResponse;
 
 /**
  * @author Remzi ŞAHBAZ
@@ -13,6 +14,6 @@ import com.testinium.entity.ResultsOfExam;
  */
 public interface ResultsOfExamService {
 
-	Optional<ResultsOfExam> createResultsOfExam(ResultsOfExam courseRegistration);
+	Optional<ResultsOfExamResponse> createResultsOfExam(ResultsOfExamRequest courseRegistration);
 
 }

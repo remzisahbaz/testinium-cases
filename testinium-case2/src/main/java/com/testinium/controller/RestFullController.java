@@ -3,7 +3,6 @@
  */
 package com.testinium.controller;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -22,11 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
 
 import com.testinium.dto.request.CourseRegistrationRequest;
+import com.testinium.dto.request.ResultsOfExamRequest;
+import com.testinium.dto.response.InformationStudentResponse;
+import com.testinium.dto.response.ResultsOfExamResponse;
 import com.testinium.entity.Course;
 import com.testinium.entity.CourseRegistration;
-import com.testinium.entity.ResultsOfExam;
 import com.testinium.entity.Student;
-import com.testinium.response.getInformantionAllStudentResponse;
 import com.testinium.service.business.StandartServiceBusiness;
 
 import io.swagger.annotations.Api;
@@ -92,55 +92,62 @@ public class RestFullController {
 		return standartServiceBusiness.createCourseRegistration(courseRegistration);
 	}
 
+	
+	
 	@ApiOperation(value = "New Results Of Exam adding method")
-	@PostMapping(value = "resultsofexam", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Optional<ResultsOfExam> createResultsOfExam(@RequestBody ResultsOfExam resultsOfExam) throws Exception {
-		System.out.println(resultsOfExam);
-		// Objects.nonNull(student);
-		return standartServiceBusiness.createResultsOfExam(resultsOfExam);
+	@PostMapping(value = "resultsOfExam", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Optional<ResultsOfExamResponse> createResultsOfExam(
+			@RequestBody ResultsOfExamRequest request) throws Exception {
+		System.out.println(request);
+		 Objects.nonNull(request);
+		 
+		return standartServiceBusiness.createResultsOfExam(request);
 	}
 
 	@ApiOperation(value = "all the grades and avarage grade of a student according to the \r\n"
-			+ "school year code, \r\n" + "course code and \r\n" + "student id \r\n" + "that will be given.")
+			+ "school year code, "
+			+ "\r\n" + "course code and \r\n"
+			+ "student id \r\n" + "that will be given.")
 	
 	// localhost:1071/school/api/v1/courseregistration?year={year}&courseCode={courseCode}&schoolNo={schoolNo}
 	@GetMapping(value = "courseregistration")
-	public Optional<String> getStudentAvarageAndResultsOfExam(
-			@RequestParam(value ="schoolNo" ) String schoolNo,
-			@RequestParam(value ="courseCode" ) String courseCode,
-			@RequestParam(value ="year" ) String year) throws Exception {
-		System.out.println("");
+	public Optional<InformationStudentResponse> getAllStudentByStudentAvarageAndResultsOfExam(
+			@RequestParam(name ="schoolNo" ) String schoolNo,
+			@RequestParam(name ="courseCode" ) String courseCode,
+			@RequestParam(name ="year" ) String year) throws Exception {
+		System.out.println("year"+year + "schoolno "+schoolNo +"courseCode"+courseCode);
 		Objects.nonNull(schoolNo);
 		Objects.nonNull(courseCode);
 		Objects.nonNull(year);
 
 		return standartServiceBusiness.getStudentBySchoolYearAndCourseCodeAndSchoolNo(schoolNo, courseCode, year);
 	}
-	@ApiOperation(value = "all the grades and avarage grade of all students according to \r\n"
-			+ "the school year code and \r\n"
-			+ "course code \r\n"
-			+ "that will be given")
-	// localhost:1071/school/api/v1/courseRegistration?year={year}&courseCode={courseCode}
-	@GetMapping(value = "courseregistration/")
-	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(
-			@RequestParam String courseCode, 
-			@RequestParam String year) throws Exception {
-		System.out.println("");
-		Objects.nonNull(courseCode);
-		Objects.nonNull(year);
-		
-		return standartServiceBusiness.getAllStudentAvarageAndResultsOfExam(courseCode, year);
-	}
-	@ApiOperation(value = "assing any course to any student")
-	// localhost:1071/school/api/v1/courseRegistration?schoolNo={schoolNo}&courseCode={courseCode}
-	@PostMapping(value = "courseregistration")
-	public Optional<String> createAnyCourseAnyStudent(
-			@RequestParam(value ="courseCode" ) String courseCode, 
-			@RequestParam(value ="schoolNo" ) String schoolNo) throws Exception {
-		System.out.println("");
-		Objects.nonNull(courseCode);
-		Objects.nonNull(schoolNo);
-		
-		return standartServiceBusiness.createAnyCourseAnyStudent(courseCode, schoolNo);
-	}
+//	@ApiOperation(value = "all the grades and avarage grade of all students according to \r\n"
+//			+ "the school year code and \r\n"
+//			+ "course code \r\n"
+//			+ "that will be given")
+//	// localhost:1071/school/api/v1/courseRegistration?year={year}&courseCode={courseCode}
+//	@GetMapping(value = "/courseregistration/")
+//	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(
+//			@RequestParam String courseCode, 
+//			@RequestParam String year) throws Exception {
+//		System.out.println("");
+//		Objects.nonNull(courseCode);
+//		Objects.nonNull(year);
+//		
+//		return standartServiceBusiness.getAllStudentAvarageAndResultsOfExam(courseCode, year);
+//	}
+//	
+//	@ApiOperation(value = "assing any course to any student")
+//	// localhost:1071/school/api/v1/courseRegistration?schoolNo={schoolNo}&courseCode={courseCode}
+//	@GetMapping(value = "courseregistration")
+//	public Optional<String> createAnyCourseAnyStudent(
+//			@RequestParam(value ="courseCode" ) String courseCode, 
+//			@RequestParam(value ="schoolNo" ) String schoolNo) throws Exception {
+//		System.out.println(courseCode +""+schoolNo);
+//		Objects.nonNull(courseCode);
+//		Objects.nonNull(schoolNo);
+//		
+//		return standartServiceBusiness.createAnyCourseAnyStudent(courseCode, schoolNo);
+//	}
 }

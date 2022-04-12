@@ -1,12 +1,18 @@
 package com.testinium.service.business;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.testinium.dto.request.CourseRegistrationRequest;
+import com.testinium.dto.request.ResultsOfExamRequest;
+import com.testinium.dto.response.InformationStudentResponse;
+import com.testinium.dto.response.ResultsOfExamResponse;
 import com.testinium.entity.Course;
 import com.testinium.entity.CourseRegistration;
 import com.testinium.entity.ResultsOfExam;
@@ -26,38 +32,44 @@ public class StandartServiceBusiness
 		implements StudentService, ResultsOfExamService, CourseService, CourseRegistrationService {
 
 	@Autowired
-	private StudentRepository studentr;
+	private StudentRepository studentRepository;
 
 	@Autowired
-	private CourseRegistrationRepository courseregr;
+	private CourseRegistrationRepository courseRegistrationRepository;
 
 	@Autowired
-	private CourseRepository courser;
+	private CourseRepository courseRepository;
 
 	@Autowired
-	private ResultsOfExamRepository resultExRep;
+	private ResultsOfExamRepository resultsOfExamRepository;
+
+	@Autowired
+	private ModelMapper modelMapper;
 
 	/**
-	 * @param studentr
-	 * @param courseregr
-	 * @param courser
-	 * @param resultp
+	 * @param studentRepository
+	 * @param courseRegistrationRepository
+	 * @param courseRepository
+	 * @param resultsOfExamRepository
+	 * @param modelMapper
 	 */
-	public StandartServiceBusiness(StudentRepository studentr, CourseRegistrationRepository courseregr,
-			CourseRepository courser, ResultsOfExamRepository resultExRep) {
-		this.studentr = studentr;
-		this.courseregr = courseregr;
-		this.courser = courser;
-		this.resultExRep = resultExRep;
+	public StandartServiceBusiness(StudentRepository studentRepository,
+			CourseRegistrationRepository courseRegistrationRepository, CourseRepository courseRepository,
+			ResultsOfExamRepository resultsOfExamRepository, ModelMapper modelMapper) {
+		this.studentRepository = studentRepository;
+		this.courseRegistrationRepository = courseRegistrationRepository;
+		this.courseRepository = courseRepository;
+		this.resultsOfExamRepository = resultsOfExamRepository;
+		this.modelMapper = modelMapper;
 	}
 
 	@Override
 	public Optional<Student> createStudent(Student student) {
 
-		var exist = studentr.existsById(student.getSchoolNo());
+		var exist = studentRepository.existsById(student.getSchoolNo());
 		if (!exist) {
 
-			return Optional.of(studentr.save(student));
+			return Optional.of(studentRepository.save(student));
 		}
 
 		return Optional.ofNullable(null);
@@ -67,22 +79,24 @@ public class StandartServiceBusiness
 	public Optional<CourseRegistration> createCourseRegistration(CourseRegistrationRequest courseRegistration) {
 
 		var newcoursereg = new CourseRegistration();
-		var student = studentr.findById(courseRegistration.getSchoolNo());
+		var student = studentRepository.findById(courseRegistration.getSchoolNo());
 
 		if (!student.isEmpty()) {
 			newcoursereg.setStudent(student.get());
-			var course = courser.findById(courseRegistration.getCourseCode());
+			var course = courseRepository.findById(courseRegistration.getCourseCode());
 
 			if (!course.isEmpty()) {
 				newcoursereg.setCourse(course.get());
-				var resultsOfExam = resultExRep.findById(courseRegistration.getResultsofexam_id());
+				// var resultsOfExam =
+				// resultExRep.findById(courseRegistration.getResultsofexam_id());
 
-				newcoursereg.setResulstOfExam(resultsOfExam.get());
 				newcoursereg.setYearCode(courseRegistration.getYearCode());
 				newcoursereg.setState(courseRegistration.isState());
-				
-				System.out.println(newcoursereg);
-				return Optional.of(courseregr.save(newcoursereg));
+
+				System.out.println("**********" + newcoursereg.getId());
+				System.out.println(newcoursereg.toString());
+
+				return Optional.of(courseRegistrationRepository.save(newcoursereg));
 
 			}
 		}
@@ -92,38 +106,91 @@ public class StandartServiceBusiness
 
 	@Override
 	public Optional<Course> createCourse(Course course) {
-		var exist = courser.existsById(course.getCourseCode());
+		var exist = courseRepository.existsById(course.getCourseCode());
 		if (!exist) {
 
-			return Optional.of(courser.save(course));
+			return Optional.of(courseRepository.save(course));
 		}
 
 		return Optional.ofNullable(null);
 	}
 
 	@Override
-	public Optional<ResultsOfExam> createResultsOfExam(ResultsOfExam courseRegistration) {
-		var exist = resultExRep.existsById(courseRegistration.getId());
-		if (!exist) {
+	public Optional<ResultsOfExamResponse> createResultsOfExam(ResultsOfExamRequest request) {
 
-			return Optional.of(resultExRep.save(courseRegistration));
+		// find student by SchoolNo
+		var existStudent = studentRepository.findById(request.getSchoolNo());
+		if (!existStudent.isEmpty()) {
+
+			// find Course by CourseCode
+			var existCourse = courseRepository.findById(request.getCourseCode());
+			if (!existCourse.isEmpty()) {
+
+				// request->converter->result
+				var resultOf = modelMapper.map(request, ResultsOfExam.class);
+
+				// set course , set courser regis.
+				resultOf.setCourse(existCourse.get());
+				// find course registration by course_registration_id
+
+				var findCourseRegistration = courseRegistrationRepository.findByStudentAndCourseAndYearCode(
+						existStudent.get(), existCourse.get(), request.getYearCode());
+				
+				System.out.println("before save------------------servis busines" + findCourseRegistration);
+			
+				
+				resultOf.setCourseRegistration(findCourseRegistration.get());
+
+				
+				// save new resultsOfExam
+				var saveResults = resultsOfExamRepository.save(resultOf);
+
+				System.out.println("after save------------------servis busines");
+				// resultof->converter->response
+				var resultResponse = modelMapper.map(saveResults, ResultsOfExamResponse.class);
+
+				resultResponse.setStudent(existStudent.get());
+				return Optional.of(resultResponse);
+
+			}
+
 		}
 
 		return Optional.ofNullable(null);
 	}
 
-	
 	@Override
-	public Optional<String> getStudentBySchoolYearAndCourseCodeAndSchoolNo(String schoolNo, String courseCode,
+	public Optional<InformationStudentResponse> getStudentBySchoolYearAndCourseCodeAndSchoolNo(String schoolNo,
+			String courseCode, String year) {
+
+		// find student by SchoolNo
+		var existStudent = studentRepository.findById(schoolNo);
+		if (!existStudent.isEmpty()) {
+
+			// find Course by CourseCode
+			var existCourse = courseRepository.findById(courseCode);
+			if (!existCourse.isEmpty()) {
+
+				var existCourseRegisration = courseRegistrationRepository
+						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year);
+
+				System.out.println("***------**-*-*--"+existCourseRegisration.get());
+
+				return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
+
+			}
+		}
+
+		return Optional.ofNullable(null);
+	}
+
+	@Override
+	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(String courseCode,
 			String year) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public Optional<List<getInformantionAllStudentResponse>> getAllStudentAvarageAndResultsOfExam(String courseCode, String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public Optional<String> createAnyCourseAnyStudent(String courseCode, String schoolNo) {
 		// TODO Auto-generated method stub

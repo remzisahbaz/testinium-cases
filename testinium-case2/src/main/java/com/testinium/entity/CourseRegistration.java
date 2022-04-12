@@ -3,17 +3,19 @@
  */
 package com.testinium.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,16 +34,19 @@ public class CourseRegistration {
 	private Long id;
 	private String yearCode;
 	private boolean state;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_no")
 	private Student student;
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = false)
-	@JoinColumn(name = "resultexam_id")
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "ResultsOfExam_CourseRegistration",
+			joinColumns = { @JoinColumn(name = "course_registration_Id") },
+			inverseJoinColumns = { @JoinColumn(name = "ResultsOfExam_Id")
+			})
 	@JsonIgnore
-	private ResultsOfExam resultsOfExam;
-	
+	private Set<ResultsOfExam> resultsOfExam = new HashSet<>();
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "courseCode")
 	private Course course;
@@ -111,14 +116,14 @@ public class CourseRegistration {
 	/**
 	 * @return the resultsOfExam
 	 */
-	public ResultsOfExam getResulstOfExam() {
+	public Set<ResultsOfExam> getResultsOfExam() {
 		return resultsOfExam;
 	}
 
 	/**
 	 * @param resultsOfExam the resultsOfExam to set
 	 */
-	public void setResulstOfExam(ResultsOfExam resultsOfExam) {
+	public void setResultsOfExam(Set<ResultsOfExam> resultsOfExam) {
 		this.resultsOfExam = resultsOfExam;
 	}
 
@@ -138,7 +143,7 @@ public class CourseRegistration {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, state, yearCode);
+		return Objects.hash(id, student, yearCode);
 	}
 
 	@Override
@@ -150,7 +155,8 @@ public class CourseRegistration {
 		if (getClass() != obj.getClass())
 			return false;
 		CourseRegistration other = (CourseRegistration) obj;
-		return Objects.equals(id, other.id) && state == other.state && Objects.equals(yearCode, other.yearCode);
+		return Objects.equals(id, other.id) && Objects.equals(student, other.student)
+				&& Objects.equals(yearCode, other.yearCode);
 	}
 
 	@Override
@@ -158,6 +164,5 @@ public class CourseRegistration {
 		return "CourseRegistration [id=" + id + ", yearCode=" + yearCode + ", state=" + state + ", student=" + student
 				+ ", resultsOfExam=" + resultsOfExam + ", course=" + course + "]";
 	}
-	
-	
+
 }
