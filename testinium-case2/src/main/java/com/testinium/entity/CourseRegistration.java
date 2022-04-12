@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Remzi ŞAHBAZ
  *
@@ -31,8 +33,9 @@ public class CourseRegistration {
 	private String yearCode;
 	private boolean state;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "school_no")
+	@JsonIgnore
 	private Student student;
 
 //	@ManyToMany(fetch = FetchType.LAZY)

@@ -171,9 +171,11 @@ public class StandartServiceBusiness
 			if (!existCourse.isEmpty()) {
 
 				var existCourseRegisration = courseRegistrationRepository
-						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year);
+						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year).stream().map(c->{
+							System.out.println(""+ c.getResultsOfExam());
+							return null;});
 
-				System.out.println("***------**-*-*--"+existCourseRegisration.get());
+			//	System.out.println("***------**-*-*--"+existCourseRegisration.get());
 				
 
 			//	return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
