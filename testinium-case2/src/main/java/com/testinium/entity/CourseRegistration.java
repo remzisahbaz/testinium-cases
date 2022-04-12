@@ -42,7 +42,8 @@ public class CourseRegistration {
 //			})
 //	@JoinColumn(name = "ResultsOfExam_Id")
 	
-	@OneToOne(mappedBy="courseRegistration" ,fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="resultsOfExam_id")
 	private ResultsOfExam resultsOfExam ;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

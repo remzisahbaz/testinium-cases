@@ -73,7 +73,7 @@ public class ModelMaperConfig {
 				
 				response.setStudent(course.getStudent());
 				
-				System.out.println("-->avarage-----"+course.getResultsOfExam().getAvarage());	
+				System.out.println("-->avarage-----"+course.getResultsOfExam());	
 				
 //				course.getResultsOfExam().stream()
 //										.map(

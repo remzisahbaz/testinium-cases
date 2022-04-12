@@ -133,15 +133,17 @@ public class StandartServiceBusiness
 				var findCourseRegistration = courseRegistrationRepository.findByStudentAndCourseAndYearCode(
 						existStudent.get(), existCourse.get(), request.getYearCode());
 				
-				System.out.println("before save------------------servis busines" + findCourseRegistration);
 			
 				
 				resultOf.setCourseRegistration(findCourseRegistration.get());
+				System.out.println("before save------------------servis busines" + findCourseRegistration);
 
 				
 				// save new resultsOfExam
 				var saveResults = resultsOfExamRepository.save(resultOf);
-
+				findCourseRegistration.get().setResultsOfExam(saveResults);
+				saveResults = resultsOfExamRepository.save(resultOf);
+				
 				System.out.println("after save------------------servis busines");
 				// resultof->converter->response
 				var resultResponse = modelMapper.map(saveResults, ResultsOfExamResponse.class);
@@ -172,8 +174,9 @@ public class StandartServiceBusiness
 						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year);
 
 				System.out.println("***------**-*-*--"+existCourseRegisration.get());
+				
 
-				return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
+			//	return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
 
 			}
 		}

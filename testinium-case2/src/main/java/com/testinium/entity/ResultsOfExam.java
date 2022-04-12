@@ -36,7 +36,7 @@ public class ResultsOfExam  {
 	private Long id;
 
 	//@ManyToMany(mappedBy="resultsOfExam")
-	@OneToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne( mappedBy="resultsOfExam")
 	@JoinColumn(name="courseRegistration_id")
 	private CourseRegistration courseRegistration;
 	
@@ -158,8 +158,7 @@ public class ResultsOfExam  {
 				+ ", firstExamResult=" + firstExamResult + ", secondExamResult=" + secondExamResult + ", avarage="
 				+ avarage + ", stateOfResult=" + stateOfResult + "]";
 	}
-
-
+	
 	
 
 
