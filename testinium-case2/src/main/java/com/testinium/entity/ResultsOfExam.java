@@ -36,7 +36,7 @@ public class ResultsOfExam  {
 	private Long id;
 
 	//@ManyToMany(mappedBy="resultsOfExam")
-	@OneToOne( mappedBy="resultsOfExam" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToOne( mappedBy="resultsOfExam" ,cascade = CascadeType.ALL)
 	@JoinColumn(name="courseRegistration_id")
 	@JsonIgnore
 	private CourseRegistration courseRegistration;
