@@ -3,17 +3,18 @@
  */
 package com.testinium.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,8 +34,7 @@ public class CourseRegistration {
 	private String yearCode;
 	private boolean state;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "school_no")
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Student student;
 
@@ -45,9 +45,9 @@ public class CourseRegistration {
 //			})
 //	@JoinColumn(name = "ResultsOfExam_Id")
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="resultsOfExam_id")
-	private ResultsOfExam resultsOfExam ;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Set<ResultsOfExam> resultsOfExam =new HashSet<>() ;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "courseCode")
@@ -118,14 +118,14 @@ public class CourseRegistration {
 	/**
 	 * @return the resultsOfExam
 	 */
-	public ResultsOfExam getResultsOfExam() {
+	public Set<ResultsOfExam> getResultsOfExam() {
 		return resultsOfExam;
 	}
 
 	/**
 	 * @param resultsOfExam the resultsOfExam to set
 	 */
-	public void setResultsOfExam(ResultsOfExam resultsOfExam) {
+	public void setResultsOfExam(Set<ResultsOfExam> resultsOfExam) {
 		this.resultsOfExam = resultsOfExam;
 	}
 

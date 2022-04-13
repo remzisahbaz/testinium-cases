@@ -3,7 +3,9 @@
  */
 package com.testinium.dto.response;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.testinium.entity.Student;
 
@@ -14,8 +16,8 @@ import com.testinium.entity.Student;
 public class InformationStudentResponse {
 
 	private Student student;
-	private String gradeName;
-	private Double gradAvarage;
+	private Set<String> gradeName= new HashSet<>();
+	private Set<Double> gradAvarage=new HashSet<>();;
 
 	
 	/**
@@ -23,42 +25,56 @@ public class InformationStudentResponse {
 	 */
 	public InformationStudentResponse() {
 	}
+	
+	
 	/**
 	 * @return the student
 	 */
 	public Student getStudent() {
 		return student;
 	}
+
+
 	/**
 	 * @param student the student to set
 	 */
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+
+
 	/**
 	 * @return the gradeName
 	 */
-	public String getGradeName() {
+	public Set<String> getGradeName() {
 		return gradeName;
 	}
+
+
 	/**
 	 * @param gradeName the gradeName to set
 	 */
-	public void setGradeName(String gradeName) {
+	public void setGradeName(Set<String> gradeName) {
 		this.gradeName = gradeName;
 	}
+
+
 	/**
 	 * @return the gradAvarage
 	 */
-	public Double getGradAvarage() {
+	public Set<Double> getGradAvarage() {
 		return gradAvarage;
 	}
+
+
 	/**
 	 * @param gradAvarage the gradAvarage to set
 	 */
-	public void setGradAvarage(Double gradAvarage) {
+	public void setGradAvarage(Set<Double> gradAvarage) {
 		this.gradAvarage = gradAvarage;
 	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(gradeName, student);

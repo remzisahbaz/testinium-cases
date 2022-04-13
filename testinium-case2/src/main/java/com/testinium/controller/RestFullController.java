@@ -67,8 +67,8 @@ public class RestFullController {
 	@ApiOperation(value = "New Student adding method")
 	@PostMapping(value = "students", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Optional<Student> createStudent(@RequestBody Student student) throws Exception {
-		System.out.println(student);
-		// Objects.nonNull(student);
+		//System.out.println(student);
+		 Objects.nonNull(student);
 		return standartServiceBusiness.createStudent(student);
 	}
 

@@ -1,6 +1,8 @@
 package com.testinium.service.business;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,21 +134,15 @@ public class StandartServiceBusiness
 
 				var findCourseRegistration = courseRegistrationRepository.findByStudentAndCourseAndYearCode(
 						existStudent.get(), existCourse.get(), request.getYearCode());
-				
+				Set<CourseRegistration>c= new HashSet<>();
+				c.add(findCourseRegistration.get());
+				resultOf.setCourseRegistration(c);
 			
-				
-				resultOf.setCourseRegistration(findCourseRegistration.get());
-				System.out.println("before save------------------servis busines" + findCourseRegistration);
 
-				
-				// save new resultsOfExam
-				var saveResults = resultsOfExamRepository.save(resultOf);
-				findCourseRegistration.get().setResultsOfExam(saveResults);
-				saveResults = resultsOfExamRepository.save(resultOf);
 				
 				System.out.println("after save------------------servis busines");
 				// resultof->converter->response
-				var resultResponse = modelMapper.map(saveResults, ResultsOfExamResponse.class);
+				var resultResponse = modelMapper.map(resultsOfExamRepository.save(resultOf), ResultsOfExamResponse.class);
 
 				resultResponse.setStudent(existStudent.get());
 				return Optional.of(resultResponse);
@@ -159,8 +155,10 @@ public class StandartServiceBusiness
 	}
 
 	@Override
-	public Optional<InformationStudentResponse> getStudentBySchoolYearAndCourseCodeAndSchoolNo(String schoolNo,
-			String courseCode, String year) {
+	public Optional<InformationStudentResponse> getStudentBySchoolYearAndCourseCodeAndSchoolNo(
+			String schoolNo,
+			String courseCode, 
+			String year) {
 
 		// find student by SchoolNo
 		var existStudent = studentRepository.findById(schoolNo);
@@ -169,16 +167,23 @@ public class StandartServiceBusiness
 			// find Course by CourseCode
 			var existCourse = courseRepository.findById(courseCode);
 			if (!existCourse.isEmpty()) {
-
+				System.out.println("--------------");
 				var existCourseRegisration = courseRegistrationRepository
-						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year).stream().map(c->{
-							System.out.println(""+ c.getResultsOfExam());
-							return null;});
+						.findByStudentAndCourseAndYearCode(
+								existStudent.get(), 
+								existCourse.get(),
+								year);
+				
+				System.out.println("--------------"+resultsOfExamRepository.findAll());
+						//.stream().map(c->{
+//									
+//							//System.out.println("--------------"+ c.getResultsOfExam());
+//							return null;});
 
 			//	System.out.println("***------**-*-*--"+existCourseRegisration.get());
 				
 
-			//	return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
+				return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
 
 			}
 		}
