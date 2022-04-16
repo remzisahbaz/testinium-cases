@@ -7,12 +7,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -45,8 +47,13 @@ public class CourseRegistration {
 //			})
 //	@JoinColumn(name = "ResultsOfExam_Id")
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JsonIgnore
+	@ManyToMany
+	 @JoinTable(
+		        name = "coursereg_result",
+		        joinColumns = @JoinColumn(name="coursereg_id", referencedColumnName = 
+		        "id"),
+		        inverseJoinColumns = @JoinColumn(name = "result_id", 
+		        referencedColumnName = "id"))
 	private Set<ResultsOfExam> resultsOfExam =new HashSet<>() ;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

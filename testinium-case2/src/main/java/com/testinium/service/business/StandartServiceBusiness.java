@@ -20,7 +20,6 @@ import com.testinium.repository.CourseRegistrationRepository;
 import com.testinium.repository.CourseRepository;
 import com.testinium.repository.ResultsOfExamRepository;
 import com.testinium.repository.StudentRepository;
-import com.testinium.response.getInformantionAllStudentResponse;
 import com.testinium.service.CourseRegistrationService;
 import com.testinium.service.CourseService;
 import com.testinium.service.ResultsOfExamService;
@@ -167,14 +166,14 @@ public class StandartServiceBusiness
 			// find Course by CourseCode
 			var existCourse = courseRepository.findById(courseCode);
 			if (!existCourse.isEmpty()) {
-				System.out.println("--------------");
+				//System.out.println("--------------");
 				var existCourseRegisration = courseRegistrationRepository
 						.findByStudentAndCourseAndYearCode(
 								existStudent.get(), 
 								existCourse.get(),
 								year);
 				
-				System.out.println("--------------"+resultsOfExamRepository.findAll());
+				System.out.println("--------------**"+courseRegistrationRepository.findAll());
 						//.stream().map(c->{
 //									
 //							//System.out.println("--------------"+ c.getResultsOfExam());
@@ -191,13 +190,7 @@ public class StandartServiceBusiness
 		return Optional.ofNullable(null);
 	}
 
-	@Override
-	public Optional<getInformantionAllStudentResponse> getAllStudentAvarageAndResultsOfExam(String courseCode,
-			String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Optional<String> createAnyCourseAnyStudent(String courseCode, String schoolNo) {
 		// TODO Auto-generated method stub

@@ -36,7 +36,7 @@ public class ResultsOfExam  {
 	private Long id;
 
 	//@ManyToMany(mappedBy="resultsOfExam")
-	@ManyToMany(mappedBy = "resultsOfExam", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "resultsOfExam")
 	@JsonIgnore
 	private Set<CourseRegistration> courseRegistration;
 	
