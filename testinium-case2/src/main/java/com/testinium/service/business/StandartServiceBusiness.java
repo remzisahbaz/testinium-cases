@@ -1,6 +1,8 @@
 package com.testinium.service.business;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,6 @@ import com.testinium.repository.CourseRegistrationRepository;
 import com.testinium.repository.CourseRepository;
 import com.testinium.repository.ResultsOfExamRepository;
 import com.testinium.repository.StudentRepository;
-import com.testinium.response.getInformantionAllStudentResponse;
 import com.testinium.service.CourseRegistrationService;
 import com.testinium.service.CourseService;
 import com.testinium.service.ResultsOfExamService;
@@ -132,21 +133,15 @@ public class StandartServiceBusiness
 
 				var findCourseRegistration = courseRegistrationRepository.findByStudentAndCourseAndYearCode(
 						existStudent.get(), existCourse.get(), request.getYearCode());
-				
+				Set<CourseRegistration>c= new HashSet<>();
+				c.add(findCourseRegistration.get());
+				resultOf.setCourseRegistration(c);
 			
-				
-				resultOf.setCourseRegistration(findCourseRegistration.get());
-				System.out.println("before save------------------servis busines" + findCourseRegistration);
 
-				
-				// save new resultsOfExam
-				var saveResults = resultsOfExamRepository.save(resultOf);
-				findCourseRegistration.get().setResultsOfExam(saveResults);
-				saveResults = resultsOfExamRepository.save(resultOf);
 				
 				System.out.println("after save------------------servis busines");
 				// resultof->converter->response
-				var resultResponse = modelMapper.map(saveResults, ResultsOfExamResponse.class);
+				var resultResponse = modelMapper.map(resultsOfExamRepository.save(resultOf), ResultsOfExamResponse.class);
 
 				resultResponse.setStudent(existStudent.get());
 				return Optional.of(resultResponse);
@@ -159,8 +154,10 @@ public class StandartServiceBusiness
 	}
 
 	@Override
-	public Optional<InformationStudentResponse> getStudentBySchoolYearAndCourseCodeAndSchoolNo(String schoolNo,
-			String courseCode, String year) {
+	public Optional<InformationStudentResponse> getStudentBySchoolYearAndCourseCodeAndSchoolNo(
+			String schoolNo,
+			String courseCode, 
+			String year) {
 
 		// find student by SchoolNo
 		var existStudent = studentRepository.findById(schoolNo);
@@ -169,16 +166,23 @@ public class StandartServiceBusiness
 			// find Course by CourseCode
 			var existCourse = courseRepository.findById(courseCode);
 			if (!existCourse.isEmpty()) {
-
+				//System.out.println("--------------");
 				var existCourseRegisration = courseRegistrationRepository
-						.findByStudentAndCourseAndYearCode(existStudent.get(), existCourse.get(), year).stream().map(c->{
-							System.out.println(""+ c.getResultsOfExam());
-							return null;});
+						.findByStudentAndCourseAndYearCode(
+								existStudent.get(), 
+								existCourse.get(),
+								year);
+				
+				System.out.println("--------------**"+courseRegistrationRepository.findAll());
+						//.stream().map(c->{
+//									
+//							//System.out.println("--------------"+ c.getResultsOfExam());
+//							return null;});
 
 			//	System.out.println("***------**-*-*--"+existCourseRegisration.get());
 				
 
-			//	return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
+				return Optional.of(modelMapper.map(existCourseRegisration.get(), InformationStudentResponse.class));
 
 			}
 		}
@@ -186,13 +190,7 @@ public class StandartServiceBusiness
 		return Optional.ofNullable(null);
 	}
 
-	@Override
-	public Optional<getInformantionAllStudentResponse> getAllStudentAvarageAndResultsOfExam(String courseCode,
-			String year) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Optional<String> createAnyCourseAnyStudent(String courseCode, String schoolNo) {
 		// TODO Auto-generated method stub

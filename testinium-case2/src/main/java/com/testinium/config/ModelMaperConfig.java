@@ -3,6 +3,9 @@
  */
 package com.testinium.config;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -21,20 +24,17 @@ import com.testinium.entity.ResultsOfExam;
 @Configuration
 public class ModelMaperConfig {
 
-
-
 	public static final Converter<ResultsOfExamRequest, ResultsOfExam> ResultOfExamRequest_To_ResultOfExam_Converted = (
 			context) -> {
 		var request = context.getSource();
 
 		var result = new ResultsOfExam();
 
-		System.out.println("result.getResultexam_id-> "+result.getId());
-		
+		System.out.println("result.getResultexam_id-> " + result.getId());
+
 		result.setSecondExamResult(request.getSecondExamResult());
 		result.setFirstExamResult(request.getFirstExamResult());
 
-		
 		result.setAvarage(
 
 				(request.getFirstExamResult() + request.getSecondExamResult()) / 2
@@ -68,27 +68,31 @@ public class ModelMaperConfig {
 	};
 	public static final Converter<CourseRegistration, InformationStudentResponse> CourseRegistration_To_AllStudentResponse_Converted = (
 			context) -> {
-				var course = context.getSource();
-				var response= new InformationStudentResponse();
+		var course = context.getSource();
+		var response = new InformationStudentResponse();
+		 Set<String> gradeNames=new HashSet<>();
+		 Set<Double> gradeAvarages=new HashSet<>();
+		 
+		response.setStudent(course.getStudent());
+
+		System.out.println("-->modelmapper-----" + course.getResultsOfExam());
+
+		course.getResultsOfExam().stream().map( r->{
+			
+			gradeNames.add(r.getCourse().getCourseName());
+			gradeAvarages.add(r.getAvarage());
+			return null;
+		});
+		
+		response.setGradeName(gradeNames);
+		response.setGradAvarage(gradeAvarages);
+		
+
+//		response.setGradAvarage(course.getResultsOfExam().getAvarage());
+
 				
-				response.setStudent(course.getStudent());
-				
-				System.out.println("-->avarage-----"+course.getResultsOfExam());	
-				
-//				course.getResultsOfExam().stream()
-//										.map(
-//											result->{
-//												
-//												var resultof= new ResultsOfExam();
-//													
-//												response.setGradeName(result.getCourse().getCourseName());
-//												response.setGradAvarage(result.getAvarage());
-//												
-//												return null;
-//											}				);
-//				
-				return response;
-			};
+		return response;
+	};
 
 	@Bean
 	public ModelMapper mapper() {
